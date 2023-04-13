@@ -65,6 +65,9 @@ body {
     display: none;
     background-color: var(--negro);
 }
+.selected {
+    text-decoration: underline;
+}
 @media screen and (max-width: 450px) {
     .burger-menu,
     .close-icon {
