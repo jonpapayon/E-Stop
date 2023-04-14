@@ -41,12 +41,10 @@ body {
 .logo-container img {
     width: 8rem;
 } 
-.burger-menu {
-    margin-right: 2rem;
-}
 .nav ul {
     display: flex;
     gap: 1rem;
+    margin-right: 2rem;
 }
 .nav li {
     list-style: none;
@@ -66,7 +64,7 @@ body {
     background-color: var(--negro);
 }
 .selected {
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 @media screen and (max-width: 450px) {
     .burger-menu,
@@ -80,7 +78,7 @@ body {
         display: flex;
         flex-direction: column;
         align-items: end;
-        gap: 2rem;
+        gap: 4rem;
         position: absolute;
         top: 0;
         right: 0;
@@ -99,3 +97,9 @@ body {
     }
 }
 /* componentes-UI */
+.cta-black {
+    background-color: var(--negro);
+    color: var(--blanco);
+    padding: .4rem;
+    border-radius: .8rem;
+}
