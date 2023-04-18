@@ -1,3 +1,4 @@
+/* general */
 * {
     padding: 0;
     margin: 0;
@@ -153,3 +154,4 @@ footer {
         flex-direction: column;
     }
 }
+
