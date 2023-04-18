@@ -25,6 +25,7 @@ html {
 body {
     font-family: 'Inter', sans-serif;
     font-size: var(--parrafo);
+    width: 100%;
 }
 /* navbar-mobile */
 .menu {
@@ -52,6 +53,7 @@ body {
 .nav a {
     color: var(--blanco);
     text-decoration: none;
+    font-weight: 300;
 }
 .burger-menu {
     display: none;
@@ -99,7 +101,55 @@ body {
 /* componentes-UI */
 .cta-black {
     background-color: var(--negro);
-    color: var(--blanco);
-    padding: .4rem;
+    padding: .8rem;
     border-radius: .8rem;
+    cursor: pointer;
+    border: none;
+}
+.cta-black a {
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: var(--parrafo);
+}
+.cta-white {
+    background-color: var(--blanco);
+    padding: .8rem;
+    border-radius: .8rem;
+    cursor: pointer;
+    border: none;
+}
+.cta-white a {
+    color: var(--negro);
+    text-decoration: none;
+    font-size: var(--parrafo);
+}
+/* footer */
+footer {
+    background-color: var(--amarilo-claro);
+    color: var(--negro-2);
+    padding: 4rem;
+    gap: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.footer-left-container, .footer-right-container {
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1rem;
+}
+.footer-right-container a {
+    color: var(--negro-2);
+}
+.footer-right-container .top {
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 2rem;
+}
+@media screen and (max-width: 450px) {
+    footer {
+        flex-direction: column;
+    }
 }
