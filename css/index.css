@@ -150,7 +150,7 @@
 }
 .modulo-section figure {
     background-color: var(--amarillo);
-    max-width: 20rem;
+    max-width: 24rem;
     display: grid;
     place-items: center;
     padding: 2rem;
