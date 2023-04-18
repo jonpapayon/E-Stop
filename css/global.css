@@ -135,7 +135,7 @@ footer {
     align-items: center;
 }
 .footer-left-container, .footer-right-container {
-    width: 30rem;
+    max-width: 30rem;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;

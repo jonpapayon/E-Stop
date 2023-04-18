@@ -40,7 +40,7 @@
     justify-content: center;
 }
 .hero-car img {
-    width: 400px;
+    width: 24rem;
 }
 .hero-cta {
     display: flex;
@@ -76,10 +76,14 @@
         padding-left: 0;
     }
 }
-
+@media screen and (min-width: 425px) {
+    .hero-car img {
+        width: 32rem;
+    }
+}
 @media screen and (min-width: 768px) {
     .hero-car img {
-        width: 700px;
+        width: 60rem;
     }
     .hero-section {
         height: 100vh;
@@ -87,7 +91,7 @@
 }
 @media screen and (min-width: 1024px) {
     .hero-car img {
-        width: 1000px;
+        width: 80rem;
     }
 }
 /* services-section */
@@ -146,7 +150,7 @@
 }
 .modulo-section figure {
     background-color: var(--amarillo);
-    width: 20rem;
+    max-width: 20rem;
     display: grid;
     place-items: center;
     padding: 2rem;
@@ -174,7 +178,7 @@
     gap: 2rem;
 }
 .befits-title-container img {
-    width: 28rem;
+    width: 24rem;
 }
 .befits-title-container h3 {
     max-width: 60rem;
@@ -197,7 +201,7 @@
     gap: 1rem;
 }
 .benefits-card p {
-    width: 32rem;
+    max-width: 32rem;
     font-size: var(--texto-pequeño);
 }
 @media screen and (max-width: 450px) {
@@ -205,14 +209,19 @@
         padding: 2rem;
     }
 }
+@media screen and (min-width: 425px) {
+    .befits-title-container img {
+        width: 32rem;
+    }
+}
 @media screen and (min-width: 768px) {
     .befits-title-container img {
-        width: 50rem;
+        width: 60rem;
     }
 }
 @media screen and (min-width: 1024px) {
     .befits-title-container img {
-        width: 70rem;
+        width: 80rem;
     }
 }
 /* testiminials-section */
@@ -242,7 +251,7 @@
     padding: 2rem;
     border-radius: .8rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    font-size: 1.2rem;
+    font-size: var(--texto-pequeño);
     display: flex;
     flex-direction: column;
     gap: 2rem;
