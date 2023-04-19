@@ -39,10 +39,27 @@
             <div class="form-container">
                 <h3>Formulario Para Negocios</h3>
                 <form class="form-negocios" id="form-negocios" action="">
-                    <label for="">
-                        <span>Tipo de negocio</span>
-                        <input type="text">
-                    </label>
+                    <div class="business-option">
+                        <legend>
+                            Selecciona tu tipo de negocio
+                        </legend>
+                        <label for="restaurante">
+                        <input type="radio" id="restaurante" name="tipoNegocio" value="rerestaurante">
+                        <span>Restaurante</span>
+                        </label>
+                        <label for="oficina">
+                            <input type="radio" id="oficina" name="tipoNegocio" value="oficina">
+                            <span>Oficina</span>
+                        </label>
+                        <label for="hospital">
+                            <input type="radio" id="hospital" name="tipoNegocio" value="hospital">
+                            <span>Hospital</span>
+                        </label>
+                        <label for="centro-comercial">
+                            <input type="radio" id="centro-comercial" name="tipoNegocio" value="centro-comercial">
+                            <span>Centro Comercial</span>
+                        </label>
+                    </div>
                     <label for="name">
                         <span>Nombre Completo</span>
                         <input name="name" id="name" required type="text">
@@ -65,17 +82,17 @@
                     </label>
                     <label for="">
                         <span>Estacionamiento</span>
-                        <input type="text">
+                        <input type="checkbox">
                     </label>
                     <label for="">
                         <span>Numero de cajones</span>
                         <input type="number">
                     </label>
-                    <label for="message">
+                    <label for="message" class="textarea">
                         <span>Mensaje</span>
                         <textarea name="message" id="message" cols="18" rows="5"></textarea>
                     </label>
-                        <button type="submit" class="">Corizar</button>
+                        <button type="submit" class="">Cotizar</button>
                 </form>
             </div>
         </section>
