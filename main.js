@@ -8,3 +8,4 @@ open.addEventListener('click', () => {
 close.addEventListener('click', () => {
     nav.classList.remove('visible')
 })
+
