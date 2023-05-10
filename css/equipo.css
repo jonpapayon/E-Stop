@@ -14,43 +14,38 @@
     --parrafo: 1.6rem;
     --texto-pequeño: 1.4rem;
 }
-section {
-    background-color: var(--gris);
-}
 .form-container {
     padding: 8rem;
     display: grid;
     place-items: center;
     gap: 2rem;
 }
-.form-negocios {
+.form-equipo {
     padding: 4rem;
-    max-width: 52rem;
+    max-width: 40rem;
     background-color: var(--blanco);
     border-radius: .8rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     gap: 2rem;
 }
-.form-negocios label {
-    width: 400px;
+.form-equipo label {
     display: flex;
     flex-direction: column;
-    gap: .4rem;
-    color: var(--negro-2);
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
-.form-negocios input, textarea {
+.form-equipo input {
     padding: .8rem;
     width: 100%;
     border: 1px solid #C0C2C3;
     border-radius: .8rem;
 }
-input[type="radio" i] {
-    width: 14px;
-}
-.form-negocios button{
+.form-equipo button{
     padding: .8rem;
     background-color: var(--amarillo);
     color: #000000;
@@ -58,37 +53,11 @@ input[type="radio" i] {
     border-radius: .8rem;
     cursor: pointer;
 }
-.business-option, .services-days, .horario-input, .input-estacionamiento {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-.business-option label, .services-days label {
-    max-width: 8rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 1rem;
-}
-input[type="checkbox" i] {
-    width: 14px;
-}
-.textarea {
-    width: 100%;
-}
 @media screen and (max-width:600px) {
-    .form-evento {
+    .form-equipo {
         padding: 2rem;
     }
     .form-container {
         padding: 2rem;
-    }
-    .form-negocios label {
-        width: 240px;
-    }
-}
-@media screen and (max-width:400px) {
-    .form-negocios label {
-        width: 200px;
     }
 }

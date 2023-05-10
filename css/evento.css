@@ -35,6 +35,27 @@ section {
     align-items: center;
     gap: 2rem;
 }
+.form-evento input, textarea {
+    padding: .8rem;
+    width: 100%;
+    border: 1px solid #C0C2C3;
+    border-radius: .8rem;
+}
+.form-evento label {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1rem;
+}
+input[type="radio" i] {
+    width: 14px;
+}
+.input-estacionamiento {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 .form-evento button{
     padding: .8rem;
     background-color: var(--amarillo);
@@ -43,13 +64,14 @@ section {
     border-radius: .8rem;
     cursor: pointer;
 }
-@media screen and (max-width:450px) {
+@media screen and (max-width:600px) {
     .form-evento {
         padding: 2rem;
     }
-}
-@media screen and (max-width:450px) {
     .form-container {
         padding: 2rem;
+    }
+    .form-evento label {
+        width: 240px;
     }
 }

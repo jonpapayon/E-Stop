@@ -39,48 +39,68 @@
         <section>
             <div class="form-container">
                 <h3>Formulario Para Eventos</h3>
-                <form class="form-evento" id="form-evento" action="">
+                <form class="form-evento" id="form-evento" 
+                action="https://formsubmit.co/whyjonpapayon@gmail.com" method="POST">
+                    <!-- input name -->
                     <label for="name">
                         <span>Nombre Completo</span>
                         <input name="name" id="name" required type="text">
                     </label>
+                    <!-- input email -->
                     <label for="email">
                         <span>Correo Eléctronico</span>
                         <input name="email" id="email" required type="email">
                     </label>
+                    <!-- input phone -->
                     <label for="phone">
                         <span>Celular</span>
                         <input name="phone" id="phone" required type="tel">
                     </label>
-                    <label for="">
+                    <!-- input date -->
+                    <label for="date">
                         <span>Fecha del Evento</span>
-                        <input type="date">
+                        <input type="date" id="date" name="date">
                     </label>
-                    <label for="">
+                    <!-- input direction -->
+                    <label for="direction">
                         <span>Lugar del Evento</span>
-                        <input type="text">
+                        <input type="text" id="direction" name="direction">
                     </label>
-                    <label for="">
+                    <!-- input numero de invitados -->
+                    <label for="numero-invitados">
                         <span>Numero de Invitados</span>
-                        <input type="number">
+                        <input type="number" id="numero-invitados" name="numero-invitados">
                     </label>
-                    <label for="">
+                    <!-- input numero de dia -->
+                    <label for="numero-dias">
                         <span>Numero de Dias</span>
-                        <input type="number">
+                        <input type="number" id="numero-dias" name="numero-dias">
                     </label>
-                    <label for="">
-                        <span>Estacionamiento</span>
-                        <input type="text">
-                    </label>
-                    <label for="">
+                    <!-- input estacionamiento -->
+                    <div class="input-estacionamiento">
+                        <legend>Estacionamiento:</legend>
+                        <label for="estacionamiento-si">
+                            <span>Si</span>
+                            <input type="radio" id="estacionamiento-si" name="estacionamiento" value="si">
+                        </label>
+                        <label for="estacionamiento-no">
+                            <span>No</span>
+                            <input type="radio" id="estacionamiento-no" name="estacionamiento" value="no">
+                        </label>
+                    </div>
+                    <!-- input numero de cajones -->
+                    <label for="numero-de-cajones">
                         <span>Numero de cajones</span>
-                        <input type="number">
+                        <input type="number" id="numero-de-cajones" name="numero-de-cajones">
                     </label>
+                    <!-- input textarea -->
                     <label for="message">
                         <span>Mensaje</span>
                         <textarea name="message" id="message" cols="18" rows="5"></textarea>
                     </label>
-                        <button type="submit" class="">Corizar</button>
+                        <button type="submit" class="">Cotizar</button>
+                    <input type="hidden" name="_next" value="index.html">
+                    <input type="hidden" name="_captcha" value="false">
                 </form>
             </div>
         </section>
@@ -104,7 +124,6 @@
             <h3>Más Información</h3>
             <a href="./equipo.html">Únete a nuestro equipo</a>
             <a href="./privacidad.html">Avsiso de privacidad</a>
-            <a href="./faqs.html">Preguntas frecuentes</a>
             <a class="top" href="https://www.topshops.digital/">hecho con amor por TOP Digital</a>
         </div>
     </footer>
