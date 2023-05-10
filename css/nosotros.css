@@ -36,7 +36,7 @@ p {
     background-color: var(--gris);
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     gap: 4rem;
 }
@@ -148,7 +148,7 @@ p {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 2rem;
 }
 .values-text-container div {
@@ -156,6 +156,9 @@ p {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+.values-text-container img {
+    width: 40px;
 }
 @media screen and (min-width:700px) {
     .values-mobile-image {

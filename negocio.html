@@ -39,10 +39,12 @@
         <section>
             <div class="form-container">
                 <h3>Formulario Para Negocios</h3>
-                <form class="form-negocios" id="form-negocios" action="">
+                <form class="form-negocios" id="form-negocios" 
+                action="https://formsubmit.co/whyjonpapayon@gmail.com" method="POST">
+                    <!-- input opcion de negocio -->
                     <div class="business-option">
                         <legend>
-                            Selecciona tu tipo de negocio
+                            Selecciona Tu Tipo De Negocio:
                         </legend>
                         <label for="restaurante">
                         <input type="radio" id="restaurante" name="tipoNegocio" value="rerestaurante">
@@ -60,43 +62,105 @@
                             <input type="radio" id="centro-comercial" name="tipoNegocio" value="centro-comercial">
                             <span>Centro Comercial</span>
                         </label>
+                        <label for="otro">
+                            <input type="radio" id="otro" name="tipoNegocio" value="otro">
+                            <span>Otro</span>
+                        </label>
                     </div>
+                    <!-- input name -->
                     <label for="name">
                         <span>Nombre Completo</span>
                         <input name="name" id="name" required type="text">
                     </label>
+                    <!-- input email -->
                     <label for="email">
                         <span>Correo Eléctronico</span>
                         <input name="email" id="email" required type="email">
                     </label>
+                    <!-- input phone -->
                     <label for="phone">
                         <span>Celular</span>
                         <input name="phone" id="phone" required type="tel">
                     </label>
-                    <label for="">
-                        <span>Dias de servicio</span>
-                        <input type="date">
-                    </label>
-                    <label for="">
-                        <span>Horario de servicio</span>
-                        <input type="time">
-                    </label>
-                    <label for="">
-                        <span>Estacionamiento</span>
-                        <input type="checkbox">
-                    </label>
-                    <label for="">
+                    <!-- input dias de servicio -->
+                    <div class="services-days">
+                        <legend>Dias de servicio:</legend>
+                        <label for="lunes">
+                            <input type="checkbox" value="lunes" id="lunes" name="lunes" checked>
+                            <span>Lunes</span>
+                        </label>
+                        <label for="martes">
+                            <input type="checkbox" value="martes" id="martes" name="martes" checked>
+                            <span>Martes</span>
+                        </label>
+                        <label for="miercoles">
+                            <input type="checkbox" value="miercoles" id="miercoles" name="miercoles" checked>
+                            <span>Miércoles</span>
+                        </label>
+                        <label for="jueves">
+                            <input type="checkbox" value="jueves" id="jueves" name="jueves" checked>
+                            <span>Jueves</span>
+                        </label>
+                        <label for="viernes">
+                            <input type="checkbox" value="viernes" id="viernes" name="viernes" checked>
+                            <span>Viernes</span>
+                        </label>
+                        <label for="sabado">
+                            <input type="checkbox" value="sabado" id="sabado" name="sabado" checked>
+                            <span>Sábado</span>
+                        </label>
+                        <label for="domingo">
+                            <input type="checkbox" value="domingo" id="domingo" name="domingo" checked>
+                            <span>Domingo</span>
+                        </label>
+                    </div>
+                    <!-- input horario -->
+                    <div class="horario-input">
+                        <legend>Horario de servicio:</legend>
+                        <span>de</span>
+                        <label for="hora-inicio">
+                            <input type="time" name="hora-inicio" id="hora-inicio">
+                        </label>
+                        <span>a</span>
+                        <label for="hora-fin">
+                            <input type="time" name="hora-fin" id="hora-fin">
+                        </label>
+                    </div>
+                    <!-- input estacionamiento -->
+                    <div class="input-estacionamiento">
+                        <legend>Estacionamiento:</legend>
+                        <label for="estacionamiento-si">
+                            <span>Si</span>
+                            <input type="radio" id="estacionamiento-si" name="estacionamiento-si" value="si">
+                        </label>
+                        <label for="estacionamiento-no">
+                            <span>No</span>
+                            <input type="radio" id="estacionamiento-no" name="estacionamiento-no" value="no">
+                        </label>
+                    </div>
+                    <!-- inpt cajones -->
+                    <label for="numero-de-cajones">
                         <span>Numero de cajones</span>
-                        <input type="number">
+                        <input type="number" id="numero-de-cajones" name="numero-de-cajones">
                     </label>
+                    <!-- text area -->
                     <label for="message" class="textarea">
                         <span>Mensaje</span>
                         <textarea name="message" id="message" cols="18" rows="5"></textarea>
                     </label>
                         <button type="submit" class="">Cotizar</button>
+                    <input type="hidden" name="_next" value="index.html">
+                    <input type="hidden" name="_captcha" value="false">
                 </form>
             </div>
         </section>
+                <!-- whatsapp section -->
+                <div class="whatsapp-container">
+                    <a class="btn-whatsapp" target="_blank"
+                    href="https://api.whatsapp.com/send?phone=3338704157&text=Hola! Quiero información sobre sus servicios.">
+                        <img src="/assets/icons/whatsapp.svg" alt="">
+                    </a>
+                </div>
     </main>
     <footer>
         <div class="footer-left-container">
