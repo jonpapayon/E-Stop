@@ -172,12 +172,12 @@ p {
 /* clients-section */
 .clients-section {
     background-color: var(--gris);
-    padding: 4rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 8rem;
+    gap: 4rem;
 }
 .clients-section h2 {
     max-width: 40rem;
@@ -188,6 +188,17 @@ p {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    gap: 12px;
+}
+.clients-images-container img {
+    width: 88px;
+    aspect-ratio: 3/2;
+    object-fit: contain;
+}
+.clients-images-container .bg-back {
+    background-color: var(--negro-2);
+    padding: 4px;
+    border-radius: 8px;
 }
 @media screen and (max-width:700px) {
     .clients-section {
