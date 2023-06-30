@@ -32,6 +32,9 @@
 .hero-subtitle {
     font-size: 1.6rem;
 }
+.hero-subtitle h1 {
+    font-size: 1.2rem;
+}
 .hero-car {
     margin-top: 4rem;
     display: flex;
@@ -40,7 +43,7 @@
     justify-content: center;
 }
 .hero-car img {
-    width: 24rem;
+    width: 28rem;
 }
 .hero-cta {
     display: flex;
@@ -60,6 +63,9 @@
     padding-right: 4rem;
 }
 @media screen and (max-width: 500px) {
+    .hero-container {
+        padding: 2rem;
+    }
     .hero-cta {
         flex-direction: column-reverse;
         flex-wrap: nowrap;
