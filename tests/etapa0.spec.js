@@ -88,7 +88,7 @@ test('index: og:image propia y CTAs navegan', async ({ page }) => {
   const cta = page.locator('.hero a.boton').first();
   const box = await cta.boundingBox();
   await page.mouse.click(box.x + 4, box.y + box.height - 4); // esquina, fuera del texto
-  await expect(page).toHaveURL(/evento\.html$/);
+  await expect(page).toHaveURL(/cotizar\.html\?tipo=evento$/);
   await page.goto('/cotizar.html');
   await page.locator('a[href="./evento.html"]').click();
   await expect(page).toHaveURL(/evento\.html$/);

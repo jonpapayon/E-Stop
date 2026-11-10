@@ -113,7 +113,9 @@ test('responsive: sin desbordamiento y capturas en 6 anchos', async ({ page }) =
 test('solo se modifican los archivos públicos autorizados por fase', () => {
   // 1A: ninguno · 1B: Home (index.html + css/inicio.css), enlace faqs de equipo.html y
   // eliminación de assets/icons/modulo.svg (pedida por el cliente)
-  const AUTORIZADOS = ['index.html', 'equipo.html', 'css/inicio.css', 'assets/icons/modulo.svg'];
+  const AUTORIZADOS = ['index.html', 'equipo.html', 'css/inicio.css', 'assets/icons/modulo.svg',
+    // 1C: formulario de cotización por WhatsApp
+    'cotizar.html', 'css/cotizacion.css'];
   const cambios = execSync('git diff --name-only f27ac64 -- "*.html" css/ main.js assets/images assets/logos assets/icons', { cwd: RAIZ }).toString()
     .split('\n').filter((f) => f && !/^(dev|partials)\//.test(f) && f !== 'css/sistema.css' && !AUTORIZADOS.includes(f));
   const nuevosSinSeguir = execSync('git ls-files --others --exclude-standard -- "*.html"', { cwd: RAIZ }).toString().split('\n').filter((f) => f && !/^(dev|partials)\//.test(f));

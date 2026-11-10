@@ -109,11 +109,11 @@ test('servicios, módulos, WhatsApp y teléfono', async ({ page }) => {
   await page.goto('/index.html');
   const servicios = await page.$$eval('#servicios .bloque, #servicios .fila', (a) => a.map((e) => ({ t: e.querySelector('h3').textContent.trim(), href: e.getAttribute('href') })));
   expect(servicios).toEqual([
-    { t: 'Eventos', href: './evento.html' },
-    { t: 'Restaurantes', href: './negocio.html?tipo=restaurante' },
-    { t: 'Oficinas', href: './negocio.html?tipo=oficina' },
-    { t: 'Hospitales', href: './negocio.html?tipo=hospital' },
-    { t: 'Centros comerciales', href: './negocio.html?tipo=centro-comercial' },
+    { t: 'Eventos', href: './cotizar.html?tipo=evento' },
+    { t: 'Restaurantes', href: './cotizar.html?tipo=restaurante' },
+    { t: 'Oficinas', href: './cotizar.html?tipo=oficina' },
+    { t: 'Hospitales', href: './cotizar.html?tipo=hospital' },
+    { t: 'Centros comerciales', href: './cotizar.html?tipo=centro-comercial' },
   ]);
   await expect(page.locator('#titulo-modulos')).toContainText('Nuestro módulo');
   await expect(page.locator('.modulos')).toContainText('resguardar las llaves y pertenencias');
