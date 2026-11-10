@@ -29,6 +29,12 @@ const FIRMAS_CV = [
     'docx' => "PK\x03\x04",
     'doc'  => "\xD0\xCF\x11\xE0\xA1\xB1\x1A\xE1",
 ];
+// Tipo MIME explícito del adjunto (el archivo temporal de PHP no tiene extensión)
+const MIME_CV = [
+    'pdf'  => 'application/pdf',
+    'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'doc'  => 'application/msword',
+];
 
 function volver(string $resultado, string $motivo = ''): void
 {
@@ -105,7 +111,7 @@ if (isset($_FILES['cv']) && is_array($_FILES['cv']) && ($_FILES['cv']['error'] ?
     }
     // Nombre seguro para el adjunto: «CV - Nombre Apellido.pdf» (sin rutas ni caracteres raros)
     $base = preg_replace('/[^\p{L}\p{N} .-]+/u', '', $nombre) ?: 'candidato';
-    $cv = ['ruta' => $f['tmp_name'], 'nombre' => 'CV - ' . $base . '.' . $ext];
+    $cv = ['ruta' => $f['tmp_name'], 'nombre' => 'CV - ' . $base . '.' . $ext, 'mime' => MIME_CV[$ext]];
 }
 
 /* ---------- Envío ---------- */
@@ -150,7 +156,7 @@ try {
     $mail->AltBody = "Nueva solicitud de empleo\n\nNombre: {$nombre}\nCorreo: {$correo}\nCelular: {$telefonoVisible}\nCurrículum: "
         . ($cv ? "adjunto ({$cv['nombre']})" : 'no adjuntó archivo') . "\n\nEnviado desde svp.com.mx";
     if ($cv) {
-        $mail->addAttachment($cv['ruta'], $cv['nombre']);
+        $mail->addAttachment($cv['ruta'], $cv['nombre'], PHPMailer::ENCODING_BASE64, $cv['mime']);
     }
     $mail->send();
 } catch (PHPMailerException $e) {
