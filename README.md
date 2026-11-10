@@ -42,5 +42,7 @@ Los scripts PHP viven solo en el servidor: aún no están versionados.
 **No subir:** `node_modules/`, `tests/`, `test-results/`, `scripts/`, `partials/`, `dev/`, `assets/fotos/`,
 `package.json`, `package-lock.json`, `playwright.config.js`, `.gitignore`, `README.md`.
 
+**Preview en Vercel:** `.vercelignore` aplica esta misma lista y `vercel.json` desactiva los despliegues automáticos por Git. Los formularios PHP no funcionan en Vercel (no hay PHP).
+
 Subir el resto (páginas `.html`, `css/`, `js/`, `assets/`, `main.js`). Antes, respaldar el servidor.
 `index.html` contiene Google Tag Manager (GTM-PMX8X4DW) y Google Ads (AW-16538094770): conservarlos.

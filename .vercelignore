@@ -1,0 +1,15 @@
+# Solo se despliega el sitio estático (ver README › Despliegue)
+node_modules
+tests
+test-results
+playwright-report
+scripts
+partials
+dev
+assets/fotos
+package.json
+package-lock.json
+playwright.config.js
+README.md
+.gitignore
+.vercelignore
