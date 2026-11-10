@@ -1,0 +1,16 @@
+{
+  "name": "estop-sitio",
+  "private": true,
+  "description": "Sitio web de E-Stop Valet Parking. HTML/CSS/JS estático: estas dependencias son SOLO de desarrollo y no se despliegan.",
+  "scripts": {
+    "serve": "python3 -m http.server 8000",
+    "test": "playwright test",
+    "partials": "node scripts/sync-partials.mjs",
+    "partials:check": "node scripts/sync-partials.mjs --check",
+    "imagenes": "node scripts/optimizar-imagenes.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "sharp": "0.34.4"
+  }
+}
