@@ -196,5 +196,18 @@
             alertDiv.classList.add('alert-danger');
         }
     </script>
+    <script>
+        // Vista previa en Vercel: no hay PHP, así que el envío se sustituye por un aviso claro.
+        // En el hosting de producción (svp.com.mx) este bloque no se ejecuta y el formulario envía a su PHP.
+        if (/\.vercel\.app$/.test(location.hostname)) {
+            const f = document.querySelector('form[action$=".php"]');
+            f.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alertDiv.className = 'alert alert-info';
+                alertDiv.textContent = 'Vista previa: en el sitio publicado este formulario se envía por correo desde el servidor de E-Stop (PHP). En esta demostración no se envió ningún dato.';
+                alertDiv.scrollIntoView({ block: 'center', behavior: 'smooth' });
+            });
+        }
+    </script>
 </body>
 </html>

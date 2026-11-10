@@ -174,7 +174,7 @@ test('negocio: envía tipo de negocio corregido y muestra aviso de error', async
 });
 
 test('equipo: el CV viaja adjunto (multipart) a FormSubmit', async ({ page }) => {
-  const cap = await interceptPost(page, 'https://formsubmit.co/**', 'http://localhost:8765/equipo.html?result=success');
+  const cap = await interceptPost(page, '**/enviar-solicitud.php', 'http://localhost:8765/equipo.html?result=success');
   await page.goto('/equipo.html');
   await page.fill('#name', 'Prueba Playwright');
   await page.fill('#email', 'prueba@example.com');
@@ -184,11 +184,10 @@ test('equipo: el CV viaja adjunto (multipart) a FormSubmit', async ({ page }) =>
   await page.locator('#form-equipo button[type=submit]').click();
   await expect(page).toHaveURL(/result=success/);
   expect(cap.method).toBe('POST');
-  expect(cap.url).toBe('https://formsubmit.co/contacto@svp.com.mx');
+  expect(cap.url).toBe('http://localhost:8765/enviar-solicitud.php');   // backend PHP propio (antes FormSubmit)
   expect(cap.contentType).toContain('multipart/form-data');
   expect(cap.body).toContain('filename="cv-prueba.pdf"');
   expect(cap.body).toContain('CONTENIDO-DE-PRUEBA');
-  expect(cap.body).toContain('https://svp.com.mx/equipo.html?result=success'); // _next absoluto
   await expect(page.locator('#alert')).toContainText('Recibimos tu solicitud');
 });
 

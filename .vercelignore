@@ -11,7 +11,12 @@ package.json
 package-lock.json
 playwright.config.js
 README.md
+DESPLIEGUE-CPANEL.md
 .gitignore
 .vercelignore
 .env*
+# Vercel no ejecuta PHP: no publicar el backend (se serviría como archivo descargable)
+*.php
+lib
+config
 .vercel

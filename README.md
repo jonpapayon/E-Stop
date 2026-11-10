@@ -34,11 +34,12 @@ Abrir los archivos con doble clic (`file://`) no funciona bien: usa siempre un s
 
 - `evento.html` → `send_mail_evento.php` (POST)
 - `negocio.html` → `send_mail_negocio.php` (POST)
-- `equipo.html` → FormSubmit `contacto@svp.com.mx` (multipart, CV adjunto, `_next` → `?result=success`)
+- `equipo.html` → `enviar-solicitud.php` (PHP propio: valida, SMTP autenticado con PHPMailer, CV adjunto, sin base de datos ni almacenamiento)
 - `cotizar.html` → sin backend: arma el mensaje y abre `wa.me/523338704157`
 
 Los scripts PHP viven solo en el servidor: aún no están versionados.
-El formulario de empleo **no usa PHP**: envía a FormSubmit (verificado en producción).
+Antes del rediseño el formulario de empleo usaba FormSubmit; ahora usa el backend PHP propio.
+Despliegue en cPanel y datos que hay que pedir al cliente: **[DESPLIEGUE-CPANEL.md](DESPLIEGUE-CPANEL.md)**.
 
 ## Analítica e integraciones de Google (inventario, nov 2026)
 
@@ -64,7 +65,7 @@ Eventos propios (sin datos personales; prefijo `estop_` para no coincidir con di
 | `estop_clic_cotizar` | Clic en un enlace a `cotizar.html` | `origen`, `servicio` |
 | `estop_whatsapp_abierto` | Se abre WhatsApp (enlace o formulario). **No es una cotización recibida** | `origen` |
 | `estop_formulario_cotizacion_completado` | El formulario de cotización pasó la validación y abrió WhatsApp (una vez por mensaje) | `servicio`, `tipo_negocio`, `envio_confirmado: false` |
-| `estop_solicitud_empleo_completada` | FormSubmit aceptó la solicitud y redirigió con `?result=success` (una vez por sesión) | — |
+| `estop_solicitud_empleo_completada` | `enviar-solicitud.php` envió la solicitud y redirigió con `?result=success` (una vez por sesión) | — |
 
 Los enlaces de WhatsApp del sitio usan `api.whatsapp.com/send?phone=…` para que la conversión 2 siga
 funcionando mientras exista. El formulario abre `wa.me` con `window.open` y no la dispara.
@@ -86,6 +87,8 @@ carga Google Ads/GTM; no menciona los datos que se recaban (nombre, correo, celu
 los encargados (FormSubmit en EE. UU., hosting/PHP, WhatsApp/Meta), los derechos ARCO ni el domicilio completo.
 
 ## Despliegue
+
+Guía completa para el hosting cPanel: [DESPLIEGUE-CPANEL.md](DESPLIEGUE-CPANEL.md).
 
 **No subir:** `node_modules/`, `tests/`, `test-results/`, `scripts/`, `partials/`, `dev/`, `assets/fotos/`,
 `package.json`, `package-lock.json`, `playwright.config.js`, `.gitignore`, `README.md`.

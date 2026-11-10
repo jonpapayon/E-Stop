@@ -1,0 +1,6 @@
+# Ninguna petición web puede leer estos archivos (solo los incluye PHP)
+Require all denied
+<IfModule !mod_authz_core.c>
+  Order allow,deny
+  Deny from all
+</IfModule>

@@ -82,6 +82,22 @@
     revelables.forEach((el) => io.observe(el));
   }
 
+  /* ---------- Cifras que cuentan al entrar en pantalla ([data-contar]) ----------
+     El HTML ya contiene el valor final (accesible y sin JS); solo se anima la presentación. */
+  const contadores = document.querySelectorAll('[data-contar]');
+  if (contadores.length && !reducido && 'IntersectionObserver' in window) {
+    const fmt = new Intl.NumberFormat('es-MX');
+    const io2 = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      io2.unobserve(e.target);
+      const el = e.target, fin = Number(el.dataset.contar), t0 = performance.now(), dur = 1400;
+      el.style.width = `${el.getBoundingClientRect().width}px`;   // ancho exacto del valor final: sin desplazamientos
+      const paso = (t) => { const k = Math.min(1, (t - t0) / dur), v = Math.round(fin * (1 - Math.pow(1 - k, 3))); el.textContent = fmt.format(v); if (k < 1) requestAnimationFrame(paso); };
+      requestAnimationFrame(paso);
+    }), { threshold: 0.6 });
+    contadores.forEach((c) => io2.observe(c));
+  }
+
   /* ---------- Acordeón con altura animada (sobre <details> nativo) ---------- */
   if (!reducido) document.querySelectorAll('.acordeon details').forEach((d) => {
     const resumen = d.querySelector('summary'), cuerpo = d.querySelector('.acordeon__cuerpo');

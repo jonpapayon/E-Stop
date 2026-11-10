@@ -9,19 +9,20 @@ async function preparar(page, w = 1440, h = 900) {
 }
 const llenar = async (page) => { await page.fill('#name', 'Ana Lucía Ñúñez'); await page.fill('#email', 'ana@example.com'); await page.fill('#phone', '33 1234 5678'); };
 
-test('contrato del formulario sin cambios (FormSubmit, multipart, _next, _subject)', async ({ page }) => {
+test('contrato del formulario: backend PHP propio, multipart, trampa anti-bots', async ({ page }) => {
   await preparar(page);
   await page.goto('/equipo.html');
-  const f = await page.locator('#form-equipo').evaluate((f) => ({ action: f.action, method: f.method, enctype: f.enctype, names: [...f.elements].filter((e) => e.name).map((e) => e.name),
-    next: f.elements._next.value, subject: f.elements._subject.value }));
-  expect(f).toEqual({ action: 'https://formsubmit.co/contacto@svp.com.mx', method: 'post', enctype: 'multipart/form-data', names: ['name', 'email', 'phone', 'cv', '_next', '_subject'],
-    next: 'https://svp.com.mx/equipo.html?result=success', subject: 'Nueva solicitud de empleo - svp.com.mx' });
+  const f = await page.locator('#form-equipo').evaluate((f) => ({ action: f.action, method: f.method, enctype: f.enctype, names: [...f.elements].filter((e) => e.name).map((e) => e.name) }));
+  expect(f).toEqual({ action: 'http://localhost:8765/enviar-solicitud.php', method: 'post', enctype: 'multipart/form-data', names: ['empresa_web', 'name', 'email', 'phone', 'cv'] });
+  // La trampa no es visible ni enfocable para personas
+  expect(await page.locator('input[name="empresa_web"]').getAttribute('tabindex')).toBe('-1');
+  await expect(page.locator('input[name="empresa_web"]')).not.toBeInViewport();
 });
 
 test('validación: obligatorios, formato de correo, celular de 10 dígitos, tipo y tamaño de CV', async ({ page }) => {
   await preparar(page);
   let enviados = 0;
-  await page.route('https://formsubmit.co/**', (r) => { enviados++; r.abort(); });
+  await page.route('**/enviar-solicitud.php', (r) => { enviados++; r.abort(); });
   await page.goto('/equipo.html');
   await page.locator('[data-enviar]').click();
   await expect(page.locator('[data-resumen]')).toHaveText('Revisa 3 campos antes de enviar.');
@@ -52,7 +53,7 @@ test('validación: obligatorios, formato de correo, celular de 10 dígitos, tipo
 test('estado de carga y CV adjunto en el POST (interceptado)', async ({ page }) => {
   await preparar(page);
   let cap = null;
-  await page.route('https://formsubmit.co/**', async (r) => {
+  await page.route('**/enviar-solicitud.php', async (r) => {
     cap = { method: r.request().method(), ct: r.request().headers()['content-type'] };
     await new Promise((res) => setTimeout(res, 800));                  // simula latencia para ver el estado de carga
     await r.fulfill({ status: 302, headers: { location: 'http://localhost:8765/equipo.html?result=success' } });
@@ -73,7 +74,7 @@ test('estado de carga y CV adjunto en el POST (interceptado)', async ({ page }) 
   expect(cap.ct).toMatch(/^multipart\/form-data/);
 });
 
-test('el CV llega por red al receptor (servidor local que hace de FormSubmit)', async ({ page }) => {
+test('el navegador envía el CV por red (receptor local en lugar del PHP)', async ({ page }) => {
   await preparar(page);
   const pdf = Buffer.from('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n1 0 obj << /Type /Catalog >> endobj\ntrailer << /Root 1 0 R >>\n%%EOF\n', 'latin1');
   let recibido = null;
@@ -91,7 +92,7 @@ test('el CV llega por red al receptor (servidor local que hace de FormSubmit)', 
   const i = recibido.body.indexOf(pdf);
   expect(i, 'PDF íntegro en el cuerpo').toBeGreaterThan(0);
   expect(recibido.body.subarray(Math.max(0, i - 200), i).toString('latin1')).toContain('name="cv"; filename="curriculum.pdf"');
-  for (const campo of ['name="name"', 'name="email"', 'name="phone"', 'name="_next"', 'name="_subject"']) expect(recibido.body.toString('latin1')).toContain(campo);
+  for (const campo of ['name="name"', 'name="email"', 'name="phone"', 'name="empresa_web"']) expect(recibido.body.toString('latin1')).toContain(campo);
 });
 
 test('confirmación tras el envío y evento de analítica una sola vez por sesión', async ({ page }) => {

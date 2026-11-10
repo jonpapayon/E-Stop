@@ -23,13 +23,20 @@ test('URL, menú y SEO conservados', async ({ page }) => {
   await expect(page.locator('h1')).toHaveCount(1);
 });
 
-test('sin cifras sin verificar, sin superlativos y sin fechas inventadas', () => {
+test('demo comercial: cifras y textos originales presentes; sin fechas ni datos nuevos', async ({ page }) => {
   const html = fs.readFileSync(path.join(RAIZ, 'nosotros.html'), 'utf8');
   const texto = norm(html.replace(/<!--[\s\S]*?-->/g, ''));
-  for (const p of [/30[.,]000/, /\b130\b/, /10[.,]000/, /\b95 ?%/, /25[.,]000/, /mejor empresa/i, /más de 20 años/i]) expect(texto, String(p)).not.toMatch(p);
-  expect(html, 'cifras ni siquiera en el código fuente').not.toMatch(/30[.,]000|10[.,]000|25[.,]000|\b95 ?%/);
+  // Todo lo que aparece ya estaba en el sitio original
+  for (const f of ['más de 30,000 automóviles al mes', 'más de 130 empleados', 'En estos más de 20 años', 'la mejor empresa en el ramo en la ciudad de Guadalajara', 'Nuestro proceso de contratación garantiza que tengamos al mejor personal']) expect(texto, f).toContain(f);
+  for (const f of ['10,000 +', '95 %', '25,000', 'más de 30,000 automóviles al mes', 'más de 130 empleados']) expect(norm(ORIGINAL), `original: ${f}`).toContain(f);
   const anios = [...texto.matchAll(/\b(19|20)\d{2}\b/g)].map((m) => m[0]);
   expect([...new Set(anios)]).toEqual(['1999']);
+  // Las cifras se muestran con su valor final (también sin JS) y cuentan al entrar en pantalla
+  await page.goto('/nosotros.html');
+  const valores = await page.$$eval('.cifra', (cs) => cs.map((c) => c.querySelector('.cifra__valor').textContent.replace(/\s+/g, '') + ' ' + c.querySelector('.cifra__texto').textContent.trim()));
+  expect(valores).toEqual(['30,000+ automóviles estacionados al mes', '130+ empleados', '10,000+ lugares de estacionamiento', '95% satisfacción del cliente', '25,000 usuarios mensuales']);
+  await page.locator('.cifras').scrollIntoViewIfNeeded();
+  await expect(page.locator('.cifra--principal [data-contar]')).toHaveText('30,000', { timeout: 5000 });
 });
 
 test('el contenido proviene del texto existente del cliente', async ({ page }) => {
@@ -49,10 +56,10 @@ test('el contenido proviene del texto existente del cliente', async ({ page }) =
   // Valores completos y clientes
   await expect(page.locator('.valores__lista li')).toHaveCount(7);
   await expect(page.locator('.linea-tiempo .hito')).toHaveCount(4);
-  // Cierre: valores + enlace compacto a cotización; sin repetir la rejilla de clientes de la Home
+  // Clientes originales de Nosotros y cierre con valores + enlace compacto a cotización
+  await expect(page.locator('.logos img')).toHaveCount(10);
   expect(await page.$$eval('.valores__cierre a', (a) => a.map((e) => e.getAttribute('href')))).toEqual(['./cotizar.html']);
   await expect(page.locator('main > section').last()).toHaveClass(/valores/);
-  await expect(page.locator('.logos')).toHaveCount(0);
   // Sin etiquetas de analítica nuevas (Nosotros no las tenía en producción)
   expect(fs.readFileSync(path.join(RAIZ, 'nosotros.html'), 'utf8')).not.toMatch(/GTM-|gtag\(/);
 });

@@ -81,10 +81,13 @@
           <a class="boton boton--oscuro" href="./index.html">Volver al inicio <span class="boton__flecha" aria-hidden="true">→</span></a>
         </div>
 
-        <!-- Destino verificado: FormSubmit (no PHP) → contacto@svp.com.mx, multipart para el CV. No cambiar sin actualizar las pruebas. -->
-        <form class="form-tarjeta" id="form-equipo" action="https://formsubmit.co/contacto@svp.com.mx" method="POST" enctype="multipart/form-data" data-formulario-empleo>
+        <!-- Backend propio en PHP (hosting cPanel): enviar-solicitud.php valida y envía por SMTP autenticado.
+             Sin base de datos; el CV no se almacena. Antes del rediseño este formulario usaba FormSubmit. -->
+        <form class="form-tarjeta" id="form-equipo" action="enviar-solicitud.php" method="POST" enctype="multipart/form-data" data-formulario-empleo>
           <h2 class="form-tarjeta__titulo"><span class="etiqueta"><b>Solicitud</b></span> Tus datos</h2>
           <div class="form-resumen" data-resumen role="alert" tabindex="-1" hidden></div>
+          <!-- Trampa para bots: oculto a personas y lectores de pantalla -->
+          <div class="sr-only" aria-hidden="true"><label>No llenar este campo <input type="text" name="empresa_web" tabindex="-1" autocomplete="off"></label></div>
           <div class="form-rejilla">
             <label class="campo ancho">
               <span class="campo__etiqueta">Nombre completo<span class="req" aria-hidden="true">*</span></span>
@@ -114,10 +117,8 @@
             <button type="submit" class="boton boton--bloque-movil" data-enviar>
               <span class="giro" aria-hidden="true"></span><span data-texto>Enviar solicitud</span> <span class="boton__flecha" aria-hidden="true">→</span>
             </button>
-            <p class="form-nota">Al enviar, verás una verificación de seguridad de nuestro proveedor de formularios. Consulta el <a href="./privacidad.html">aviso de privacidad</a>.</p>
+            <p class="form-nota">Tu solicitud se envía por correo a E-Stop; el sitio no guarda tus datos ni tu archivo. Consulta el <a href="./privacidad.html">aviso de privacidad</a>.</p>
           </div>
-          <input type="hidden" name="_next" value="https://svp.com.mx/equipo.html?result=success">
-          <input type="hidden" name="_subject" value="Nueva solicitud de empleo - svp.com.mx">
         </form>
       </div>
 

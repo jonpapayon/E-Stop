@@ -110,20 +110,20 @@ test('PHP negocio: aviso de error con ?result=error', async ({ page }) => {
 });
 
 // ---------- 3. Empleo: PDF + destinatario ----------
-test('Empleo: adjunta PDF íntegro a FormSubmit con destinatario correcto', async ({ page }) => {
+test('Empleo: adjunta PDF íntegro al backend PHP (multipart)', async ({ page }) => {
   const pdf = makePdf();
   fs.writeFileSync(path.join(OUT, 'cv-prueba.pdf'), pdf);
   await page.goto('/equipo.html');
   const form = page.locator('#form-equipo');
 
   let sentEmpty = false;
-  await page.route('https://formsubmit.co/**', r => { sentEmpty = true; r.abort(); });
+  await page.route('**/enviar-solicitud.php', r => { sentEmpty = true; r.abort(); });
   await form.locator('button[type=submit]').click();
   await page.waitForTimeout(300);
   expect(sentEmpty).toBe(false);
-  await page.unroute('https://formsubmit.co/**');
+  await page.unroute('**/enviar-solicitud.php');
 
-  const cap = await captureForm(page, 'https://formsubmit.co/**', 'http://localhost:8765/equipo.html?result=success');
+  const cap = await captureForm(page, '**/enviar-solicitud.php', 'http://localhost:8765/equipo.html?result=success');
   await page.fill('#name', 'Auditoría Playwright');
   await page.fill('#email', 'auditoria@example.com');
   await page.fill('#phone', '3312345678');
@@ -132,7 +132,7 @@ test('Empleo: adjunta PDF íntegro a FormSubmit con destinatario correcto', asyn
   await expect(page).toHaveURL(/result=success/);
 
   expect(cap.count).toBe(1);
-  expect(cap.url).toBe('https://formsubmit.co/contacto@svp.com.mx');
+  expect(cap.url).toBe('http://localhost:8765/enviar-solicitud.php');
   expect(cap.contentType).toMatch(/^multipart\/form-data; boundary=/);
   const boundary = cap.contentType.split('boundary=')[1];
   const parts = cap.buf.toString('latin1').split('--' + boundary).slice(1, -1).map(p => {
@@ -150,10 +150,10 @@ test('Empleo: adjunta PDF íntegro a FormSubmit con destinatario correcto', asyn
     bodyStart: Buffer.from(cv.body, 'latin1').subarray(0, 24).toString('hex'), pdfStart: pdf.subarray(0, 24).toString('hex') });
   // Chromium no expone a la interceptación los bytes de archivos leídos de disco: se verifican en el test de red.
   const field = n => (parts.find(p => p.head.includes(`name="${n}"`)) || {}).body;
-  expect(field('_next')).toBe('https://svp.com.mx/equipo.html?result=success');
+  expect(names).not.toContain('_next');   // ya no es FormSubmit
   await expect(page.locator('#alert')).toContainText('Recibimos tu solicitud');
   log('empleo', { url: cap.url, contentType: cap.contentType, parts: names,
-    pdfBytes: pdf.length, cvHead: cv.head, next: field('_next'), subject: field('_subject') });
+    pdfBytes: pdf.length, cvHead: cv.head, honeypot: field('empresa_web') });
 });
 
 
@@ -174,7 +174,7 @@ test('Empleo: el navegador envía el PDF desde disco por red (servidor local de 
   try {
     await page.goto('/equipo.html');
     const realAction = await page.locator('#form-equipo').evaluate(f => f.action);
-    expect(realAction).toBe('https://formsubmit.co/contacto@svp.com.mx');
+    expect(realAction).toBe('http://localhost:8765/enviar-solicitud.php');
     // Solo en la prueba: se apunta el form al receptor local, conservando enctype y campos
     await page.locator('#form-equipo').evaluate(f => { f.action = 'http://localhost:8766/contacto@svp.com.mx'; });
     await page.fill('#name', 'Auditoría Playwright');

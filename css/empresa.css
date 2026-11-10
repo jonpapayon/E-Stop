@@ -38,6 +38,27 @@
     }
   }
 
+  /* Cifras: una principal grande + cuatro secundarias */
+  .cifras__rejilla { display: grid; grid-template-columns: minmax(0, 5fr) repeat(2, minmax(0, 3.5fr)); grid-template-rows: auto auto; border-top: 1px solid var(--linea); }
+  .cifra { display: grid; align-content: space-between; gap: var(--e-4); padding: var(--e-6) var(--e-5); border-bottom: 1px solid var(--linea); border-left: 1px solid var(--linea); min-height: 11rem; }
+  .cifra--principal { grid-row: span 2; border-left: 0; padding-left: 0; background: radial-gradient(70% 60% at 0% 100%, rgb(255 212 0 / .08), transparent 70%); }
+  .cifra__valor { white-space: nowrap; font: 800 clamp(2.5rem, 1.5rem + 3.5vw, 4.5rem)/.9 var(--f-display); font-stretch: 112%; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  .cifra--principal .cifra__valor { font-size: clamp(3.75rem, 1.5rem + 8vw, 9rem); color: var(--c-senal); }
+  .cifra__valor [data-contar] { display: inline-block; text-align: left; }
+  .cifra__valor sup { font-size: .45em; vertical-align: .9em; margin-left: .05em; color: var(--c-senal); }
+  .cifra--principal .cifra__valor sup { color: var(--c-tiza); }
+  .cifra__texto { font: 500 var(--t-xs)/1.4 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--tenue); max-width: 22ch; }
+  .cifra--principal .cifra__texto { font: 600 var(--t-l)/1.3 var(--f-texto); letter-spacing: 0; text-transform: none; color: var(--texto); }
+  @media (max-width: 900px) {
+    .cifras__rejilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cifra--principal { grid-column: 1 / -1; grid-row: auto; padding-left: 0; min-height: 0; }
+    .cifra { min-height: 8.5rem; padding: var(--e-5) var(--e-4); }
+    .cifra:nth-child(even) { border-left: 0; padding-left: 0; }
+    .cifra__valor { font-size: clamp(1.9rem, .8rem + 5.6vw, 3rem); font-stretch: 80%; }
+    .cifra--principal .cifra__valor { font-size: clamp(3rem, 1rem + 12vw, 6rem); font-stretch: 90%; }
+  }
+  .clientes-emp .logos figure { aspect-ratio: 16 / 8; }
+
   /* Respaldo: destacado amarillo + lista numerada */
   .respaldo__rejilla { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--e-5) clamp(2rem, 5vw, 5rem); align-items: start; }
   .respaldo__destacado {

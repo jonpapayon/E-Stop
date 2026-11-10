@@ -26,6 +26,7 @@
   .form-tarjeta .archivo.is-error { border-color: var(--c-stop); }
   .form-resumen { padding: var(--e-4) var(--e-5); border-left: 3px solid var(--c-stop); background: rgb(232 53 43 / .12); color: #FFB1AB; font-weight: 500; }
   .form-resumen[hidden] { display: none; }
+  .form-resumen--info { border-left-color: var(--c-senal); background: rgb(255 212 0 / .1); color: var(--c-tiza); }
   .form-acciones { display: grid; gap: var(--e-3); justify-items: start; }
   .form-acciones .boton { min-height: 58px; }
   .form-nota { font-size: var(--t-xs); color: var(--tenue); max-width: 56ch; }
@@ -74,6 +75,7 @@
   .rasgo p { color: var(--tenue); font-size: var(--t-s); max-width: 34ch; }
   @media (max-width: 760px) { .rasgos { grid-template-columns: minmax(0, 1fr); } .rasgo { border-left: 0; padding-left: 0; border-top: 1px solid var(--linea); } .rasgo:first-child { border-top: 0; } }
 
-  /* Aviso de los formularios PHP (?result=success|error) dentro de la tarjeta */
+  /* Aviso de los formularios PHP (?result=success|error) dentro de la tarjeta; info = vista previa sin PHP */
+  .alert-info { background: rgb(255 212 0 / .1); border-color: var(--c-senal); color: var(--c-tiza); }
   .form-tarjeta .alert { margin: 0; }
 }

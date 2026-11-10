@@ -1,6 +1,6 @@
-/* Solicitud de empleo: validación, estado de carga y confirmación.
-   El envío sigue siendo un POST nativo multipart a FormSubmit (el CV viaja adjunto).
-   No se usa fetch: así el flujo es idéntico al de producción y funciona sin JavaScript. */
+/* Solicitud de empleo: validación, estado de carga, error y confirmación.
+   El envío es un POST nativo multipart a enviar-solicitud.php (PHP en el hosting cPanel), que
+   redirige con ?result=success | ?result=error&motivo=…  Funciona también sin JavaScript. */
 (() => {
   const form = document.querySelector('[data-formulario-empleo]');
   if (!form) return;
@@ -15,15 +15,16 @@
   let intentado = false;
   const tocados = new Set();
 
-  /* ---------- Confirmación tras el redireccionamiento de FormSubmit ---------- */
-  const resultado = new URLSearchParams(location.search).get('result');
+  /* ---------- Resultado devuelto por enviar-solicitud.php ---------- */
+  const params = new URLSearchParams(location.search);
+  const resultado = params.get('result');
   if (resultado === 'success') {
     form.hidden = true;
     confirmacion.hidden = false;
     document.getElementById('alert').textContent = '¡Gracias! Recibimos tu solicitud. Nos pondremos en contacto pronto.';
     confirmacion.focus({ preventScroll: true });
     requestAnimationFrame(() => confirmacion.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
-    // Analítica: solicitud aceptada por el proveedor (una vez por sesión)
+    // Analítica: el servidor aceptó y envió la solicitud (una vez por sesión)
     try {
       if (!sessionStorage.getItem('estop_empleo_ok')) {
         (window.estopAnalitica || ((e, d) => (window.dataLayer = window.dataLayer || []).push({ event: e, ...d })))('estop_solicitud_empleo_completada', {});
@@ -33,7 +34,20 @@
     return;
   }
 
-  form.noValidate = true;                               // validación propia (con JS); sin JS valida el navegador
+  form.noValidate = true;                               // validación propia (con JS); sin JS validan el navegador y el servidor
+
+  // Error devuelto por el servidor
+  const MOTIVOS = {
+    validacion: 'Revisa tus datos: nombre completo, correo válido y celular de 10 dígitos.',
+    archivo: 'El currículum no es válido. Adjunta un PDF o un Word (.pdf, .doc, .docx).',
+    tamano: 'El archivo es demasiado grande. El máximo es 10 MB.',
+    envio: 'No pudimos enviar tu solicitud en este momento. Inténtalo más tarde o llámanos al 33 3870 4157.',
+  };
+  if (resultado === 'error') {
+    resumen.hidden = false;
+    resumen.textContent = MOTIVOS[params.get('motivo')] || MOTIVOS.envio;
+    requestAnimationFrame(() => { resumen.scrollIntoView({ block: 'center' }); resumen.focus({ preventScroll: true }); });
+  }
 
   const v = (id) => form.elements[id].value.trim();
   const digitos = (s) => s.replace(/[\s\-().]/g, '').replace(/^\+?52/, '');
@@ -96,7 +110,17 @@
       form.elements[claves[0]].focus();
       return;
     }
+    // Vista previa en Vercel: no hay PHP. Se muestra un aviso claro en lugar de un error del servidor.
+    if (/\.vercel\.app$/.test(location.hostname)) {
+      ev.preventDefault();
+      resumen.hidden = false;
+      resumen.classList.add('form-resumen--info');
+      resumen.textContent = 'Vista previa: en el sitio publicado esta solicitud se envía por correo desde el servidor de E-Stop (PHP), con el CV adjunto. En esta demostración no se envió ningún dato.';
+      resumen.focus();
+      return;
+    }
     // Válido: se deja continuar el POST nativo y se muestra el estado de carga
+    resumen.classList.remove('form-resumen--info');
     resumen.hidden = true;
     boton.setAttribute('aria-busy', 'true');
     boton.querySelector('[data-texto]').textContent = archivo.files.length ? 'Enviando solicitud y CV…' : 'Enviando solicitud…';

@@ -13,8 +13,7 @@
     <link rel="stylesheet" href="./css/sistema.css">
     <link rel="stylesheet" href="./css/empresa.css">
     <script>document.documentElement.classList.add('js')</script>
-    <!-- Contenido tomado del texto existente del cliente. Las cifras (autos/mes, empleados,
-         lugares, satisfacción) NO se publican hasta verificarlas: ver README › Pendiente de validación. -->
+    <!-- Contenido tomado literalmente del sitio original (cifras incluidas). Pendiente de validación del cliente: ver README. -->
 </head>
 <body>
 <!-- parcial:cabecera activo="nosotros" -->
@@ -93,7 +92,7 @@
           <span class="hito__marca">Hoy</span>
           <div>
             <h3 class="titulo">Confianza y mejora continua</h3>
-            <p>La empresa se ha caracterizado por crear una imagen de confianza y honestidad hacia nuestros clientes y contratantes, con un esfuerzo por mejorar continuamente.</p>
+            <p>En estos más de 20 años, la empresa se ha caracterizado por dar el mejor servicio y atención, creando una imagen de confianza y honestidad hacia nuestros clientes y contratantes. La experiencia alcanzada en estos años, aunada a nuestro esfuerzo por mejorar continuamente, nos posiciona como la mejor empresa en el ramo en la ciudad de Guadalajara: actualmente estacionamos más de 30,000 automóviles al mes y contamos con más de 130 empleados.</p>
             <p class="hito__exp">Contamos con amplia experiencia en:</p>
             <ul class="hito__sectores" role="list">
               <li>Eventos privados</li><li>Eventos masivos</li><li>Eventos sociales</li><li>Restaurantes</li><li>Bares</li><li>Casinos</li><li>Hoteles</li><li>Estacionamientos privados</li>
@@ -104,11 +103,31 @@
     </div>
   </section>
 
+  <!-- ============ CIFRAS (originales del sitio) ============ -->
+  <section class="seccion cifras" aria-labelledby="titulo-cifras">
+    <div class="contenedor">
+      <div class="encabezado">
+        <span class="etiqueta"><b>[02]</b> En números</span>
+        <div><h2 class="display display--h2 revelar" id="titulo-cifras">Operación <em>en números.</em></h2></div>
+      </div>
+      <div class="cifras__rejilla">
+        <div class="cifra cifra--principal revelar">
+          <span class="cifra__valor"><span data-contar="30000">30,000</span><sup>+</sup></span>
+          <span class="cifra__texto">automóviles estacionados al mes</span>
+        </div>
+        <div class="cifra revelar" style="--i:1"><span class="cifra__valor"><span data-contar="130">130</span><sup>+</sup></span><span class="cifra__texto">empleados</span></div>
+        <div class="cifra revelar" style="--i:2"><span class="cifra__valor"><span data-contar="10000">10,000</span><sup>+</sup></span><span class="cifra__texto">lugares de estacionamiento</span></div>
+        <div class="cifra revelar" style="--i:3"><span class="cifra__valor"><span data-contar="95">95</span><sup>%</sup></span><span class="cifra__texto">satisfacción del cliente</span></div>
+        <div class="cifra revelar" style="--i:4"><span class="cifra__valor"><span data-contar="25000">25,000</span></span><span class="cifra__texto">usuarios mensuales</span></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ RESPALDO PARA EL CONTRATANTE ============ -->
   <section class="seccion tema-cal respaldo" aria-labelledby="titulo-respaldo">
     <div class="contenedor">
       <div class="encabezado">
-        <span class="etiqueta"><b>[02]</b> Respaldo</span>
+        <span class="etiqueta"><b>[03]</b> Respaldo</span>
         <div>
           <h2 class="display display--h2 revelar" id="titulo-respaldo">Respaldo para quien <em>nos contrata.</em></h2>
           <p class="revelar">Lo que respalda cada operación que realizamos para restaurantes, oficinas, hospitales, centros comerciales y eventos.</p>
@@ -124,8 +143,30 @@
           <li class="revelar" style="--i:0"><span class="respaldo__n" aria-hidden="true">02</span><div><h3 class="titulo">Póliza de responsabilidad civil</h3><p>Contratamos una póliza de seguro con cobertura de responsabilidad civil en cada uno de los establecimientos donde prestamos nuestros servicios.</p></div></li>
           <li class="revelar" style="--i:1"><span class="respaldo__n" aria-hidden="true">03</span><div><h3 class="titulo">Cláusulas claras en cada ticket</h3><p>En nuestro ticket, tanto físico como virtual, vienen claramente especificadas nuestras cláusulas y cada responsabilidad de nuestro servicio, con el respaldo legal de un contrato de adhesión que protege a los usuarios.</p></div></li>
           <li class="revelar" style="--i:2"><span class="respaldo__n" aria-hidden="true">04</span><div><h3 class="titulo">Seguridad y vigilancia</h3><p>Implementamos protocolos eficientes de seguridad que nos permiten reducir los riesgos de robo. Los vehículos que resguardamos son siempre vigilados por nuestro personal.</p></div></li>
-          <li class="revelar" style="--i:3"><span class="respaldo__n" aria-hidden="true">05</span><div><h3 class="titulo">Personal confiable</h3><p>Contamos con un proceso de contratación y capacitamos a nuestro personal para que desempeñe sus funciones con profesionalismo. Realizamos investigaciones laborales a todo nuestro personal.</p></div></li>
+          <li class="revelar" style="--i:3"><span class="respaldo__n" aria-hidden="true">05</span><div><h3 class="titulo">Personal confiable</h3><p>Nuestro proceso de contratación garantiza que tengamos al mejor personal, además los capacitamos para que desempeñen sus funciones con profesionalismo. Realizamos investigaciones laborales a todo nuestro personal.</p></div></li>
         </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLIENTES (originales de Nosotros) ============ -->
+  <section class="seccion seccion--sin-arriba clientes-emp" aria-labelledby="titulo-clientes">
+    <div class="contenedor">
+      <div class="encabezado">
+        <span class="etiqueta"><b>[04]</b> Clientes</span>
+        <div><h2 class="display display--h3 revelar" id="titulo-clientes">Clientes que han confiado en nosotros</h2></div>
+      </div>
+      <div class="logos revelar">
+        <figure><img src="./assets/img/clientes/banorte.webp" alt="Banorte" width="480" height="59" loading="lazy" decoding="async"></figure>
+        <figure><img src="./assets/img/clientes/escudo-ipade.webp" alt="IPADE Business School" width="299" height="112" loading="lazy" decoding="async" class="logo--tono"></figure>
+        <figure><img src="./assets/img/clientes/logo-starbucks.webp" alt="Starbucks" width="112" height="112" loading="lazy" decoding="async" class="logo--tono"></figure>
+        <figure><img src="./assets/img/clientes/landmark.svg" alt="The Landmark" width="258" height="140" loading="lazy" decoding="async"></figure>
+        <figure><img src="./assets/img/clientes/punto-sur.webp" alt="Punto Sur" width="453" height="112" loading="lazy" decoding="async"></figure>
+        <figure><img src="./assets/img/clientes/casa-bariachi.webp" alt="Casa Bariachi" width="128" height="112" loading="lazy" decoding="async"></figure>
+        <figure><img src="./assets/img/clientes/sagrantino.webp" alt="Sagrantino" width="323" height="41" loading="lazy" decoding="async"></figure>
+        <figure><img src="./assets/img/clientes/anita-li.webp" alt="Anita Li" width="438" height="99" loading="lazy" decoding="async"></figure>
+        <figure><img src="./assets/img/clientes/el-italiano.webp" alt="El Italiano" width="244" height="112" loading="lazy" decoding="async"></figure>
+        <figure><img src="./assets/img/clientes/i-latina.webp" alt="i Latina" width="83" height="102" loading="lazy" decoding="async"></figure>
       </div>
     </div>
   </section>
@@ -134,7 +175,7 @@
   <section class="valores" aria-labelledby="titulo-valores">
     <div class="franja" aria-hidden="true"></div>
     <div class="contenedor seccion">
-      <span class="etiqueta"><b>[03]</b> Valores</span>
+      <span class="etiqueta"><b>[05]</b> Valores</span>
       <h2 class="sr-only" id="titulo-valores">Valores</h2>
       <ul class="valores__lista" role="list">
         <li class="revelar" style="--i:0">Integridad</li>

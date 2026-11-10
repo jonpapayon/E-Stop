@@ -6,3 +6,5 @@ playwright-report/
 dev/candidatas/
 .vercel
 .env*
+estop-privado/
+config/correo.php
