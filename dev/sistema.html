@@ -27,12 +27,12 @@
     .intro-sistema { padding-top: calc(var(--cabecera) + clamp(3rem, 8vw, 7rem)); overflow-x: clip; }
     .intro-sistema .rejilla > * { grid-column: 1 / -1; }
     .intro-sistema__auto { position: relative; margin-top: clamp(-6rem, -6vw, -2rem); display: flex; justify-content: flex-end; pointer-events: none; }
-    .intro-sistema__auto img { width: min(56vw, 900px); filter: drop-shadow(0 40px 40px rgb(0 0 0 / .6)) saturate(.85) brightness(.92); }
+    .intro-sistema__auto img { width: min(56vw, 900px); border: 1px solid var(--linea); }
     @media (max-width: 900px) {
       .tira-temas, .demo-svc, .demo-tk, .demo-form { grid-template-columns: 1fr; }
       .escala > div { grid-template-columns: 1fr; gap: var(--e-2); }
       .intro-sistema__auto { margin-top: var(--e-6); }
-      .intro-sistema__auto img { width: 120%; max-width: none; margin-right: -20%; }
+      .intro-sistema__auto img { width: 100%; }
     }
   </style>
 </head>
@@ -42,7 +42,7 @@
 <header class="cabecera">
   <div class="contenedor cabecera__barra">
     <a class="cabecera__logo" href="../index.html" aria-label="E-Stop Valet Parking, inicio">
-      <img src="../assets/icons/LOGO-STOP-min%201.png" alt="Logotipo de E-Stop Valet Parking" width="512" height="294">
+      <img src="../assets/img/logo-estop.png" alt="Logotipo de E-Stop Valet Parking" width="240" height="138">
     </a>
     <nav class="nav" aria-label="Principal">
       <a href="../index.html#servicios" data-nav="servicios">Servicios</a>
@@ -87,9 +87,8 @@
     </div>
     <div class="intro-sistema__auto revelar" style="--i:4">
       <picture>
-        <source type="image/avif" srcset="../assets/img/hero/audi-480.avif 480w, ../assets/img/hero/audi-720.avif 720w, ../assets/img/hero/audi-897.avif 897w" sizes="(max-width: 900px) 120vw, 56vw">
-        <source type="image/webp" srcset="../assets/img/hero/audi-480.webp 480w, ../assets/img/hero/audi-720.webp 720w, ../assets/img/hero/audi-897.webp 897w" sizes="(max-width: 900px) 120vw, 56vw">
-        <img src="../assets/img/hero/audi-897.png" alt="" width="897" height="339" fetchpriority="high">
+        <source type="image/avif" srcset="../assets/img/hero/foto-escritorio-1280.avif 1280w, ../assets/img/hero/foto-escritorio-1920.avif 1920w" sizes="(max-width: 900px) 100vw, 56vw">
+        <img src="../assets/img/hero/foto-escritorio-1280.jpg" alt="" width="1280" height="720">
       </picture>
     </div>
     <div class="marquesina" aria-hidden="true">
@@ -290,7 +289,7 @@
   <div class="contenedor">
     <div class="pie__rejilla">
       <div class="pie__marca">
-        <img src="../assets/icons/LOGO-STOP-min%201.png" alt="E-Stop Valet Parking" width="512" height="294" loading="lazy">
+        <img src="../assets/img/logo-estop.png" alt="E-Stop Valet Parking" width="240" height="138" loading="lazy">
         <p>Profesionales dedicados a cubrir de manera integral las necesidades de operación de estacionamientos y servicio de acomodadores.</p>
       </div>
       <div>
@@ -339,6 +338,10 @@
   </a>
   <a class="barra-movil__cotizar" href="../cotizar.html">Cotizar <span aria-hidden="true">→</span></a>
 </nav>
+<a class="wa-flotante" href="https://wa.me/523338704157?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios." target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.65-4.8A8.5 8.5 0 1 1 7.9 19.5z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1a4 4 0 0 1-2-2l1-1-1-2z" stroke-width="1.3"/></svg>
+  <span>WhatsApp</span>
+</a>
 <!-- /parcial:barra-movil -->
 
 <script src="../js/sitio.js" defer></script>

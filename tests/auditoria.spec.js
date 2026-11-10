@@ -7,6 +7,22 @@ const PAGES = ['index.html', 'nosotros.html', 'cotizar.html', 'evento.html',
   'negocio.html', 'equipo.html', 'privacidad.html', '404.html'];
 const OUT = path.join(__dirname, '..', 'test-results', 'auditoria');
 fs.mkdirSync(path.join(OUT, 'shots'), { recursive: true });
+
+// Menú móvil: funciona con el diseño nuevo (.hamburguesa) y con el antiguo (#open/#close)
+async function probarMenu(page) {
+  if (await page.locator('.hamburguesa').count()) {
+    const menu = page.locator('#menu-movil'), b = page.locator('.hamburguesa');
+    const antes = await menu.isHidden();
+    await b.click(); await page.waitForTimeout(700);
+    const abre = await menu.isVisible();
+    await b.click(); await page.waitForTimeout(700);
+    return { abre: antes && abre, cierra: await menu.isHidden() };
+  }
+  const nav = page.locator('nav');
+  await page.locator('#open').click(); const abre = await nav.isVisible();
+  await page.locator('#close').click(); return { abre, cierra: await nav.isHidden() };
+}
+
 const log = (name, data) => fs.writeFileSync(path.join(OUT, name + '.json'), JSON.stringify(data, null, 2));
 
 const BLOCK = /googletagmanager\.com|google-analytics\.com|doubleclick\.net/;
@@ -208,7 +224,7 @@ test('Enlaces: internos 200, WhatsApp, teléfono, navegación', async ({ page, r
   // Navegación por menú en escritorio
   await page.goto('/index.html');
   for (const [txt, url] of [['Nosotros', /nosotros\.html$/], ['Cotizar', /cotizar\.html$/], ['Inicio', /index\.html$/]]) {
-    await page.locator('nav').getByRole('link', { name: txt }).click();
+    await page.locator('.cabecera .nav, header nav').first().getByRole('link', { name: txt, exact: true }).click();
     await expect(page).toHaveURL(url);
   }
   await page.goto('/cotizar.html');
@@ -219,6 +235,7 @@ test('Enlaces: internos 200, WhatsApp, teléfono, navegación', async ({ page, r
 
 // ---------- 5. Consola + responsive ----------
 test('Consola y responsive en 6 anchos × 8 páginas', async ({ page }) => {
+  test.setTimeout(150000);
   const widths = [320, 375, 414, 768, 1024, 1440];
   const res = { console: [], overflow: [], menu: [], dupIds: [] };
   page.on('console', m => { if (m.type() === 'error' || m.type() === 'warning') res.console.push(`[${m.type()}] ${page.url().split('/').pop()}: ${m.text()}`); });
@@ -245,10 +262,7 @@ test('Consola y responsive en 6 anchos × 8 páginas', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 800 });
   for (const p of PAGES) {
     await page.goto('/' + p);
-    await page.locator('#open').click();
-    const vis = await page.locator('nav').isVisible();
-    await page.locator('#close').click();
-    const hid = await page.locator('nav').isHidden();
+    const { abre: vis, cierra: hid } = await probarMenu(page);
     if (!(vis && hid)) res.menu.push(`${p}: menú móvil falla (abre=${vis}, cierra=${hid})`);
   }
   res.outbound = realOutbound;

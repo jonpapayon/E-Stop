@@ -25,7 +25,7 @@ Abrir los archivos con doble clic (`file://`) no funciona bien: usa siempre un s
 | `partials/` | Cabecera, pie y barra móvil compartidos (fuente única) |
 | `assets/fuentes/` | Archivo, Inter y JetBrains Mono autoalojadas (SIL OFL 1.1) |
 | `assets/img/` | Imágenes optimizadas generadas por `npm run imagenes` |
-| `assets/fotos/` | Huecos para fotografía real del cliente (ver su README) |
+| `assets/fotos/` | Originales de fotografía (no se despliegan) y créditos: ver `CREDITOS.md` y su README |
 | `dev/sistema.html` | Hoja de componentes (interna, no se despliega) |
 | `tests/` | Pruebas Playwright: contratos de formularios, enlaces, responsive, sistema |
 
@@ -39,7 +39,7 @@ Los scripts PHP viven solo en el servidor: aún no están versionados.
 
 ## Despliegue
 
-**No subir:** `node_modules/`, `tests/`, `test-results/`, `scripts/`, `partials/`, `dev/`,
+**No subir:** `node_modules/`, `tests/`, `test-results/`, `scripts/`, `partials/`, `dev/`, `assets/fotos/`,
 `package.json`, `package-lock.json`, `playwright.config.js`, `.gitignore`, `README.md`.
 
 Subir el resto (páginas `.html`, `css/`, `js/`, `assets/`, `main.js`). Antes, respaldar el servidor.

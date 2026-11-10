@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Hero · candidatas fotográficas (interno)</title>
+  <link rel="stylesheet" href="../css/sistema.css">
+  <style>
+    body { padding-bottom: 6rem; }
+    .cab { padding: 4rem var(--margen) 2rem; max-width: var(--ancho); margin: 0 auto; }
+    .cab h1 { margin: 1rem 0; }
+    .cab p { color: var(--tenue); max-width: 70ch; }
+    .cand { max-width: var(--ancho); margin: 0 auto; padding: 3rem var(--margen); border-top: 1px solid var(--linea); }
+    .cand__cab { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 2rem; align-items: baseline; margin-bottom: 1.5rem; }
+    .cand__cab h2 { font: 800 clamp(2rem, 1rem + 3vw, 3.5rem)/1 var(--f-display); text-transform: uppercase; }
+    .cand__cab h2 b { color: var(--c-senal); }
+    .marcos { display: grid; grid-template-columns: minmax(0, 1fr) 236px; gap: 1.5rem; align-items: start; }
+    .marco { position: relative; overflow: hidden; background: #000; border: 1px solid var(--linea-fuerte); }
+    .marco--escritorio { aspect-ratio: 16 / 9; container-type: inline-size; }
+    .marco--movil { width: 236px; aspect-ratio: 390 / 844; container-type: inline-size; border-radius: 18px; }
+    .marco img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .velo { position: absolute; inset: 0; background: linear-gradient(90deg, rgb(11 11 10 / .88) 0%, rgb(11 11 10 / .55) 42%, rgb(11 11 10 / 0) 72%), linear-gradient(0deg, rgb(11 11 10 / .9) 0%, rgb(11 11 10 / 0) 35%); }
+    .marco--movil .velo { background: linear-gradient(180deg, rgb(11 11 10 / .9) 0%, rgb(11 11 10 / .45) 48%, rgb(11 11 10 / .1) 70%, rgb(11 11 10 / .85) 100%); }
+    .mock { position: absolute; inset: 0; padding: 7cqw 5cqw; display: flex; flex-direction: column; justify-content: center; }
+    .mock .e { font: 500 1.05cqw/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--tenue); }
+    .mock .e b { color: var(--c-senal); font-weight: 500; }
+    .mock .t { font: 800 6.6cqw/.9 var(--f-display); text-transform: uppercase; letter-spacing: -.02em; margin: 2cqw 0; }
+    .mock .t em { font-style: normal; color: var(--c-senal); }
+    .mock .l { font-size: 1.3cqw; color: var(--c-tiza); opacity: .8; max-width: 34cqw; }
+    .mock .b { display: flex; gap: .8cqw; margin-top: 2.4cqw; }
+    .mock .b span { padding: 1.1cqw 1.6cqw; font: 600 1.15cqw/1 var(--f-texto); background: var(--c-senal); color: var(--c-asfalto); }
+    .mock .b span + span { background: transparent; color: var(--c-tiza); box-shadow: inset 0 0 0 1px var(--linea-fuerte); }
+    .marco--movil .mock { justify-content: flex-start; padding: 22cqw 6cqw; }
+    .marco--movil .mock .e { font-size: 3cqw; }
+    .marco--movil .mock .t { font-size: 12.6cqw; font-stretch: 72%; font-weight: 850; margin: 4cqw 0; }
+    .marco--movil .mock .l { font-size: 3.8cqw; max-width: none; }
+    .marco--movil .mock .b { flex-direction: column; gap: 2cqw; margin-top: 5cqw; }
+    .marco--movil .mock .b span { font-size: 3.6cqw; padding: 3.6cqw 4cqw; }
+    .ficha { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem 2rem; margin-top: 1.5rem; font-size: var(--t-s); }
+    .ficha dt { font: 500 var(--t-xs)/1.4 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--tenue); margin-bottom: .3rem; }
+    .ficha a { text-decoration: underline; text-decoration-color: var(--c-senal); }
+    .ok { color: #9BE3BB; } .alerta { color: #FFB1AB; }
+    @media (max-width: 900px) { .marcos { grid-template-columns: 1fr; } .marco--movil { margin: 0 auto; } .ficha { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="cab">
+    <span class="etiqueta"><b>[Interno]</b> Fase 1B · Fotografía del hero</span>
+    <h1 class="display display--h2">Candidatas para el hero</h1>
+    <p>Cada foto se muestra dentro del hero real (titular, CTAs y velo de contraste) en escritorio y móvil. Todas son de Pexels, gratuitas, con licencia que permite uso comercial y verificadas página por página. Ninguna se ha integrado todavía: solo vistas previas reducidas (2400px) fuera de Git.</p>
+  </header>
+
+  <!-- A -->
+  <section class="cand" id="a">
+    <div class="cand__cab"><h2><b>A</b> · Estudio en penumbra</h2><span class="etiqueta">Recomendada</span></div>
+    <div class="marcos">
+      <div class="marco marco--escritorio"><img src="candidatas/33268786.webp" alt="" style="object-position: 62% 60%"><div class="velo"></div>
+        <div class="mock"><span class="e"><b>[01]</b> Valet parking en Guadalajara · Desde 1999</span><div class="t">Estamos cambiando<br>la forma en que<br><em>te estacionas.</em></div><p class="l">Profesionales dedicados a cubrir de manera integral la operación de estacionamientos.</p><div class="b"><span>Cotizar evento →</span><span>Cotizar negocio →</span></div></div></div>
+      <div class="marco marco--movil"><img src="candidatas/33268786.webp" alt="" style="object-position: 64% 50%"><div class="velo"></div>
+        <div class="mock"><span class="e"><b>[01]</b> Valet parking · GDL</span><div class="t">Estamos cambiando la forma en que <em>te estacionas.</em></div><div class="b"><span>Cotizar evento →</span><span>Cotizar negocio →</span></div></div></div>
+    </div>
+    <dl class="ficha">
+      <div><dt>Fuente · autor</dt><dd><a href="https://www.pexels.com/photo/sleek-white-sports-car-in-dark-garage-setting-33268786/" target="_blank" rel="noopener">Pexels 33268786</a> · <a href="https://www.pexels.com/@quentin-martinez-2147503099/" target="_blank" rel="noopener">Quentin Martinez</a></dd></div>
+      <div><dt>Resolución</dt><dd class="ok">8192 × 4608 (16:9)</dd></div>
+      <div><dt>Licencia</dt><dd class="ok">Pexels · gratis, uso comercial, sin atribución obligatoria</dd></div>
+      <div><dt>A tener en cuenta</dt><dd>Fondo casi negro: máximo contraste para el texto y encaja con la paleta. Emblema Alfa Romeo y una placa de concesionario pequeños: se pueden atenuar en el recorte.</dd></div>
+    </dl>
+  </section>
+
+  <!-- B -->
+  <section class="cand" id="b">
+    <div class="cand__cab"><h2><b>B</b> · Estacionamiento subterráneo</h2></div>
+    <div class="marcos">
+      <div class="marco marco--escritorio"><img src="candidatas/35417660.webp" alt="" style="object-position: 70% 50%"><div class="velo"></div>
+        <div class="mock"><span class="e"><b>[01]</b> Valet parking en Guadalajara · Desde 1999</span><div class="t">Estamos cambiando<br>la forma en que<br><em>te estacionas.</em></div><p class="l">Profesionales dedicados a cubrir de manera integral la operación de estacionamientos.</p><div class="b"><span>Cotizar evento →</span><span>Cotizar negocio →</span></div></div></div>
+      <div class="marco marco--movil"><img src="candidatas/35417660.webp" alt="" style="object-position: 60% 50%"><div class="velo"></div>
+        <div class="mock"><span class="e"><b>[01]</b> Valet parking · GDL</span><div class="t">Estamos cambiando la forma en que <em>te estacionas.</em></div><div class="b"><span>Cotizar evento →</span><span>Cotizar negocio →</span></div></div></div>
+    </div>
+    <dl class="ficha">
+      <div><dt>Fuente · autor</dt><dd><a href="https://www.pexels.com/photo/luxury-mercedes-benz-in-underground-garage-35417660/" target="_blank" rel="noopener">Pexels 35417660</a> · <a href="https://www.pexels.com/@kadir-aycan-1780184903/" target="_blank" rel="noopener">Kadir Aycan</a></dd></div>
+      <div><dt>Resolución</dt><dd class="ok">6993 × 3934</dd></div>
+      <div><dt>Licencia</dt><dd class="ok">Pexels · gratis, uso comercial</dd></div>
+      <div><dt>A tener en cuenta</dt><dd class="alerta">Matrícula legible (habría que difuminarla) y logotipos Mercedes/AMG visibles. El auto ocupa la zona del titular.</dd></div>
+    </dl>
+  </section>
+
+  <!-- C -->
+  <section class="cand" id="c">
+    <div class="cand__cab"><h2><b>C</b> · Arquitectura de columnas</h2></div>
+    <div class="marcos">
+      <div class="marco marco--escritorio"><img src="candidatas/28986817.webp" alt="" style="object-position: 70% 55%; filter: brightness(.7) saturate(.6)"><div class="velo"></div>
+        <div class="mock"><span class="e"><b>[01]</b> Valet parking en Guadalajara · Desde 1999</span><div class="t">Estamos cambiando<br>la forma en que<br><em>te estacionas.</em></div><p class="l">Profesionales dedicados a cubrir de manera integral la operación de estacionamientos.</p><div class="b"><span>Cotizar evento →</span><span>Cotizar negocio →</span></div></div></div>
+      <div class="marco marco--movil"><img src="candidatas/28986817.webp" alt="" style="object-position: 56% 50%; filter: brightness(.7) saturate(.6)"><div class="velo"></div>
+        <div class="mock"><span class="e"><b>[01]</b> Valet parking · GDL</span><div class="t">Estamos cambiando la forma en que <em>te estacionas.</em></div><div class="b"><span>Cotizar evento →</span><span>Cotizar negocio →</span></div></div></div>
+    </div>
+    <dl class="ficha">
+      <div><dt>Fuente · autor</dt><dd><a href="https://www.pexels.com/photo/modern-car-parked-in-urban-parking-garage-28986817/" target="_blank" rel="noopener">Pexels 28986817</a> · <a href="https://www.pexels.com/@bylukemiller/" target="_blank" rel="noopener">Luke Miller</a></dd></div>
+      <div><dt>Resolución</dt><dd class="ok">6950 × 4633</dd></div>
+      <div><dt>Licencia</dt><dd class="ok">Pexels · gratis, uso comercial</dd></div>
+      <div><dt>A tener en cuenta</dt><dd>La más «arquitectónica» y de estacionamiento real. Foto clara: necesita oscurecerse (aplicado aquí) y la señalética naranja y «west entrance» compiten con el amarillo.</dd></div>
+    </dl>
+  </section>
+
+  <!-- D -->
+  <section class="cand" id="d">
+    <div class="cand__cab"><h2><b>D</b> · Nocturna en estacionamiento</h2></div>
+    <div class="marcos">
+      <div class="marco marco--escritorio"><img src="candidatas/16343569.webp" alt="" style="object-position: 60% 60%"><div class="velo"></div>
+        <div class="mock"><span class="e"><b>[01]</b> Valet parking en Guadalajara · Desde 1999</span><div class="t">Estamos cambiando<br>la forma en que<br><em>te estacionas.</em></div><p class="l">Profesionales dedicados a cubrir de manera integral la operación de estacionamientos.</p><div class="b"><span>Cotizar evento →</span><span>Cotizar negocio →</span></div></div></div>
+      <div class="marco marco--movil"><img src="candidatas/16343569.webp" alt="" style="object-position: 45% 50%"><div class="velo"></div>
+        <div class="mock"><span class="e"><b>[01]</b> Valet parking · GDL</span><div class="t">Estamos cambiando la forma en que <em>te estacionas.</em></div><div class="b"><span>Cotizar evento →</span><span>Cotizar negocio →</span></div></div></div>
+    </div>
+    <dl class="ficha">
+      <div><dt>Fuente · autor</dt><dd><a href="https://www.pexels.com/photo/car-in-an-underground-parking-garage-16343569/" target="_blank" rel="noopener">Pexels 16343569</a> · <a href="https://www.pexels.com/@joaquin-delgado-497073239/" target="_blank" rel="noopener">Joaquin Delgado</a></dd></div>
+      <div><dt>Resolución</dt><dd class="ok">5149 × 3433</dd></div>
+      <div><dt>Licencia</dt><dd class="ok">Pexels · gratis, uso comercial</dd></div>
+      <div><dt>A tener en cuenta</dt><dd class="alerta">Matrícula legible y señalética de un centro comercial real («Jockey Plaza»): podría sugerir que E-Stop opera allí. Auto de gama media.</dd></div>
+    </dl>
+  </section>
+</body>
+</html>

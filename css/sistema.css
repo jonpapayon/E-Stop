@@ -206,6 +206,7 @@
     /* En móvil la familia se estrecha: titulares más contundentes y sin cortes torpes */
     .display { font-stretch: 72%; font-weight: 850; line-height: .9; letter-spacing: -.01em; }
     .display--ancha { font-stretch: 84%; }
+    .display--h2 { font-size: clamp(2.5rem, 11vw, 3.5rem); }
   }
   .titulo { font: 700 var(--t-xl)/1.15 var(--f-display); font-stretch: 108%; letter-spacing: -.01em; }
   .lead { font-size: var(--t-l); line-height: 1.55; color: var(--tenue); max-width: 46ch; }
@@ -272,7 +273,7 @@
     border-bottom: 1px solid transparent;
     transition: background var(--d-3) var(--ease), border-color var(--d-3), transform var(--d-3) var(--ease);
   }
-  .cabecera.is-solida { background: rgb(11 11 10 / .8); -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2); border-color: var(--linea); }
+  .cabecera.is-solida { background: rgb(11 11 10 / .94); -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2); border-color: var(--linea); }
   .cabecera.is-oculta { transform: translateY(-100%); }
   .cabecera__barra { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--e-6); height: 100%; }
   .cabecera__logo { display: block; width: 92px; }
@@ -341,6 +342,20 @@
     .barra-movil a.barra-movil__cotizar { flex-direction: row; gap: 8px; background: var(--c-senal); color: var(--c-asfalto); font: 700 var(--t-m)/1 var(--f-texto); letter-spacing: 0; text-transform: none; border: 0; }
     html.menu-abierto .barra-movil { transform: translateY(100%); }
   }
+
+  /* ---------- WhatsApp flotante (escritorio; en móvil lo cubre la barra) ---------- */
+  .wa-flotante {
+    position: fixed; right: clamp(16px, 1.6vw, 28px); bottom: clamp(16px, 1.6vw, 28px); z-index: var(--z-barra);
+    display: inline-flex; align-items: center; gap: 0; height: 56px; padding: 0 16px; border-radius: 999px;
+    background: var(--c-acero); color: var(--c-tiza); border: 1px solid var(--linea-fuerte);
+    box-shadow: 0 18px 40px -12px rgb(0 0 0 / .6); overflow: hidden;
+    transition: gap var(--d-3) var(--ease), background var(--d-2), color var(--d-2), border-color var(--d-2), transform var(--d-3) var(--ease);
+  }
+  .wa-flotante svg { width: 24px; height: 24px; flex-shrink: 0; }
+  .wa-flotante span { max-width: 0; opacity: 0; white-space: nowrap; font: 600 var(--t-s)/1 var(--f-texto); transition: max-width var(--d-3) var(--ease), opacity var(--d-2); }
+  .wa-flotante:hover, .wa-flotante:focus-visible { gap: 10px; background: var(--c-senal); color: var(--c-asfalto); border-color: var(--c-senal); transform: translateY(-2px); }
+  .wa-flotante:hover span, .wa-flotante:focus-visible span { max-width: 8rem; opacity: 1; }
+  @media (max-width: 900px) { .wa-flotante { display: none; } }
 
   /* ---------- Pie ---------- */
   .pie { background: var(--c-asfalto); border-top: 1px solid var(--linea); padding-top: clamp(4rem, 2rem + 6vw, 7rem); overflow: hidden; }

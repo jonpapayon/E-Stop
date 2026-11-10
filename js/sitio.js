@@ -79,6 +79,22 @@
     });
   });
 
+  /* ---------- Paralaje por capas con el puntero ([data-paralaje] → --px/--py en -1…1) ---------- */
+  if (!reducido && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('[data-paralaje]').forEach((el) => {
+      let raf = 0;
+      el.addEventListener('pointermove', (e) => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          const r = el.getBoundingClientRect();
+          el.style.setProperty('--px', (((e.clientX - r.left) / r.width) * 2 - 1).toFixed(3));
+          el.style.setProperty('--py', (((e.clientY - r.top) / r.height) * 2 - 1).toFixed(3));
+        });
+      });
+      el.addEventListener('pointerleave', () => { el.style.setProperty('--px', 0); el.style.setProperty('--py', 0); });
+    });
+  }
+
   /* ---------- Campo de archivo: muestra el nombre elegido ---------- */
   document.querySelectorAll('.archivo input[type="file"]').forEach((input) => {
     const caja = input.closest('.archivo'), nombre = caja.querySelector('.archivo__nombre');

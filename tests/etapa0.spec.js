@@ -10,6 +10,22 @@ const PAGES = ['index.html', 'nosotros.html', 'cotizar.html', 'evento.html',
 const SHOTS = path.join(__dirname, '..', 'test-results', 'capturas');
 const SITE_DIR = path.join(__dirname, '..');
 
+// Menú móvil: funciona con el diseño nuevo (.hamburguesa) y con el antiguo (#open/#close)
+async function probarMenu(page) {
+  if (await page.locator('.hamburguesa').count()) {
+    const menu = page.locator('#menu-movil'), b = page.locator('.hamburguesa');
+    const antes = await menu.isHidden();
+    await b.click(); await page.waitForTimeout(700);
+    const abre = await menu.isVisible();
+    await b.click(); await page.waitForTimeout(700);
+    return { abre: antes && abre, cierra: await menu.isHidden() };
+  }
+  const nav = page.locator('nav');
+  await page.locator('#open').click(); const abre = await nav.isVisible();
+  await page.locator('#close').click(); return { abre, cierra: await nav.isHidden() };
+}
+
+
 test.beforeEach(async ({ page }) => {
   await page.route(/googletagmanager\.com|google-analytics\.com|doubleclick\.net/, r => r.abort());
 });
@@ -68,10 +84,12 @@ test('index: og:image propia y CTAs navegan', async ({ page }) => {
   expect(html).toContain('AW-16538094770');
 
   // El CTA del hero es clicable en toda su área (no solo el texto)
-  const cta = page.locator('.hero-cta a.cta-black');
+  await page.waitForTimeout(1600); // fin de la animación de entrada
+  const cta = page.locator('.hero a.boton').first();
   const box = await cta.boundingBox();
-  await page.mouse.click(box.x + 3, box.y + 3); // esquina, fuera del texto
-  await expect(page).toHaveURL(/cotizar\.html$/);
+  await page.mouse.click(box.x + 4, box.y + box.height - 4); // esquina, fuera del texto
+  await expect(page).toHaveURL(/evento\.html$/);
+  await page.goto('/cotizar.html');
   await page.locator('a[href="./evento.html"]').click();
   await expect(page).toHaveURL(/evento\.html$/);
 });
@@ -89,12 +107,8 @@ test('index: FAQs abren y cierran', async ({ page }) => {
 test('menú móvil abre y cierra', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 800 });
   await page.goto('/index.html');
-  const nav = page.locator('nav');
-  await expect(nav).toBeHidden();
-  await page.locator('#open').click();
-  await expect(nav).toBeVisible();
-  await page.locator('#close').click();
-  await expect(nav).toBeHidden();
+  const r = await probarMenu(page);
+  expect(r).toEqual({ abre: true, cierra: true });
 });
 
 // ---------- Formularios ----------
@@ -179,6 +193,7 @@ test('equipo: el CV viaja adjunto (multipart) a FormSubmit', async ({ page }) =>
 
 // ---------- Capturas responsive (evidencia visual, no falla) ----------
 test('capturas responsive', async ({ page }) => {
+  test.setTimeout(120000);
   fs.mkdirSync(SHOTS, { recursive: true });
   const tag = process.env.SHOT_TAG || 'etapa0';
   const overflow = [];
