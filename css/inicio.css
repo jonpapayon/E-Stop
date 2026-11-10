@@ -15,7 +15,8 @@
   /* Fotografía a sangre + velo de contraste (el titular siempre sobre zona oscura) */
   .hero__foto { position: absolute; inset: 0; z-index: 0; overflow: hidden; animation: asentar 2.4s var(--ease) both; }
   .hero__foto img { width: 100%; height: 100%; object-fit: cover; object-position: 88% 55%; }
-  @keyframes asentar { from { opacity: 0; transform: scale(1.06); } }
+  /* Sin fundido desde opacidad 0: la foto es el LCP y debe pintarse en el primer fotograma */
+  @keyframes asentar { from { transform: scale(1.06); } }
   .hero__velo {
     position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background:
@@ -222,8 +223,11 @@
     .hero__foto img { animation: foto-scroll linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
     @keyframes foto-scroll { to { transform: translateY(12%) scale(1.05); } }
     /* Manifiesto: cada palabra se ilumina al cruzar la pantalla */
-    .manifiesto__texto .p { opacity: .16; animation: palabra linear both; animation-timeline: view(); animation-range: entry 10% cover 42%; }
-    @keyframes palabra { to { opacity: 1; } }
+    /* Cada palabra pasa del color atenuado (contraste AA) al pleno: el texto siempre es legible */
+    .manifiesto__texto .p { color: var(--tenue); animation: palabra linear both; animation-timeline: view(); animation-range: entry 10% cover 42%; }
+    .manifiesto__texto .p.sector { animation-name: palabra-sector; }
+    @keyframes palabra { to { color: var(--c-tiza); } }
+    @keyframes palabra-sector { to { color: var(--c-senal); } }
     /* Números de operación: deriva vertical sutil */
     .operacion__num { animation: deriva linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
     @keyframes deriva { from { transform: translateY(18px); } to { transform: translateY(-18px); } }

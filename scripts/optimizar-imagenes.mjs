@@ -111,7 +111,7 @@ async function logos() {
     const stats = await s.stats();
     const fondoOpaco = !hasAlpha || stats.channels[3]?.min === 255;
     const out = p('assets/img/clientes', `${slug}.webp`);
-    await sharp(join(dir, f)).trim({ threshold: 10 }).resize({ height: 112, withoutEnlargement: true }).webp({ quality: 85, alphaQuality: 100 }).toFile(out);
+    await sharp(join(dir, f)).trim({ threshold: 10 }).resize({ width: 480, height: 112, fit: 'inside', withoutEnlargement: true }).webp({ quality: 85, alphaQuality: 100 }).toFile(out);
     informe.push(`assets/img/clientes/${slug}.webp  ${kb(out)}${fondoOpaco ? '   ⚠ fondo opaco: revisar en tema oscuro' : ''}`);
   }
 }
@@ -126,6 +126,16 @@ async function fotos() {
   }
 }
 
+/* 5 · Textura de grano (ruido monocromo con alfa) para body::after */
+async function grano() {
+  const L = 64, px = Buffer.alloc(L * L * 2);
+  let s = 1337; const rnd = () => ((s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff);   // determinista
+  for (let i = 0; i < L * L; i++) { const v = rnd(); px[i * 2] = v > .5 ? 255 : 0; px[i * 2 + 1] = Math.round(Math.abs(v - .5) * 2 * 255); }
+  const out = p('assets/img/grano.png');
+  await sharp(px, { raw: { width: L, height: L, channels: 2 } }).png({ compressionLevel: 9, palette: false }).toFile(out);
+  informe.push(`assets/img/grano.png  ${kb(out)}`);
+}
+
 /* 4 · Logotipo de E-Stop (se muestra a 76–120px: 2× = 240px) */
 async function logotipo() {
   mkdirSync(p('assets/img'), { recursive: true });
@@ -138,6 +148,7 @@ async function logotipo() {
 
 await heroFoto();
 await logotipo();
+await grano();
 await logos();
 await fotos();
 console.log(informe.join('\n'));

@@ -210,11 +210,12 @@ test('integración: CTAs de la Home llevan al formulario y los formularios PHP s
   await page.goto('/cotizar.html');
   await expect(page.locator('.cot__alterno a[href="./evento.html"]')).toBeVisible();
   await expect(page.locator('.cot__alterno a[href="./negocio.html"]')).toBeVisible();
-  // evento.html y negocio.html: único cambio permitido desde la Etapa 0 = enlace de WhatsApp a api.whatsapp.com
-  const diff = execSync('git diff -U0 f27ac64 -- evento.html negocio.html', { cwd: RAIZ }).toString()
-    .split('\n').filter((l) => /^[+-](?![+-])/.test(l));
-  expect(diff.length).toBeGreaterThan(0);
-  for (const l of diff) expect(l, l).toMatch(/wa\.me\/523338704157|api\.whatsapp\.com\/send\?phone=523338704157/);
+  // evento.html y negocio.html: mismo contrato que en la Etapa 0 (action, method, campos y ocultos)
+  const contrato = (html) => html.replace(/<!--[\s\S]*?-->/g, '').match(/action="[^"]*"|method="[^"]*"|name="[a-zA-Z_]+"(?:[^>]*value="[^"]*")?/g).filter((s) => !/name="(viewport|description|title|theme-color)"/.test(s)).map((s) => s.replace(/\s+type="[^"]*"|\s+id="[^"]*"|\s+required/g, '')).sort();
+  for (const p of ['evento.html', 'negocio.html']) {
+    const antes = contrato(execSync(`git show f27ac64:${p}`, { cwd: RAIZ }).toString()), ahora = contrato(require('fs').readFileSync(require('path').join(RAIZ, p), 'utf8'));
+    expect(ahora, p).toEqual(antes);
+  }
   for (const p of ['evento.html', 'negocio.html']) {
     await page.goto('/' + p);
     expect(await page.getAttribute(p === 'evento.html' ? '#form-evento' : '#form-negocios', 'action')).toBe(p === 'evento.html' ? 'send_mail_evento.php' : 'send_mail_negocio.php');

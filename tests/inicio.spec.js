@@ -91,12 +91,13 @@ test('FAQs: las 10 preguntas y respuestas originales, accesibles y animadas', as
     expect(norm(q), `pregunta ${i + 1}`).toBe(norm(FAQS[i][0]).replace('si le el', 'si el'));
     expect(norm(a).length, `respuesta ${i + 1}`).toBeGreaterThan(norm(FAQS[i][1]).length * 0.97);
   }
-  // Teclado: Enter abre, Espacio cierra
+  // Teclado: Enter abre, Espacio cierra. Se registra la llamada a animate() (robusto bajo carga)
+  await page.evaluate(() => { window.__animaciones = 0; const o = Element.prototype.animate; Element.prototype.animate = function (...a) { if (this.classList.contains('acordeon__cuerpo')) window.__animaciones++; return o.apply(this, a); }; });
   const s = items.nth(2).locator('summary');
   await s.focus();
   await page.keyboard.press('Enter');
   await expect(items.nth(2)).toHaveAttribute('open', '');
-  const animando = await items.nth(2).locator('.acordeon__cuerpo').evaluate((e) => e.getAnimations().length > 0);
+  const animando = await page.evaluate(() => window.__animaciones > 0);
   await page.waitForTimeout(500);
   await expect(items.nth(2).locator('.acordeon__cuerpo')).toBeVisible();
   await page.keyboard.press(' ');

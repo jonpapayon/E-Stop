@@ -1,0 +1,79 @@
+/* =========================================================================
+   PÁGINAS DE FORMULARIO · empleo (FormSubmit), evento y negocio (PHP)
+   Comparten estructura: intro editorial + formulario + columna de contexto.
+   ========================================================================= */
+@layer componentes {
+  .form-intro { padding: calc(var(--cabecera) + clamp(3rem, 8vw, 6.5rem)) 0 clamp(2.5rem, 5vw, 4.5rem); }
+  .form-intro .display { margin: var(--e-5) 0 var(--e-5); }
+  .form-intro .lead { max-width: 54ch; }
+
+  .form-pagina { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--e-7) clamp(2rem, 6vw, 7rem); align-items: start; }
+  .form-pagina__lateral { position: sticky; top: calc(var(--cabecera) + var(--e-5)); display: grid; gap: var(--e-6); }
+  @media (max-width: 960px) { .form-pagina { grid-template-columns: minmax(0, 1fr); } .form-pagina__lateral { position: static; } }
+
+  /* Tarjeta del formulario */
+  .form-tarjeta { display: grid; gap: var(--e-6); padding: clamp(1.5rem, 1rem + 2.4vw, 3rem); background: var(--superficie); border: 1px solid var(--linea); clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%); }
+  .form-tarjeta__titulo { display: flex; align-items: baseline; gap: var(--e-4); font: 700 var(--t-xl)/1.15 var(--f-display); font-stretch: 106%; }
+  .form-rejilla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--e-6); }
+  .form-rejilla .ancho { grid-column: 1 / -1; }
+  @media (max-width: 600px) { .form-rejilla { grid-template-columns: minmax(0, 1fr); gap: var(--e-5); } }
+  .form-tarjeta .campo__etiqueta .req { color: var(--c-senal); margin-left: .2em; }
+  .form-tarjeta .campo input:not([type="radio"]):not([type="checkbox"]):not([type="file"]):hover { border-bottom-color: var(--c-tiza); }
+  /* Empleo: errores escritos por JS (vacíos = ocultos). Evento/negocio: validación nativa (sistema.css, :user-invalid) */
+  [data-formulario-empleo] .campo__error { display: block; font-size: var(--t-xs); color: #FF8A80; }
+  [data-formulario-empleo] .campo__error:empty { display: none; }
+  .form-tarjeta .is-error input:not([type="radio"]):not([type="checkbox"]):not([type="file"]) { border-bottom-color: var(--c-stop); background-image: linear-gradient(var(--c-stop), var(--c-stop)); background-size: 100% 2px; }
+  .form-tarjeta .archivo.is-error { border-color: var(--c-stop); }
+  .form-resumen { padding: var(--e-4) var(--e-5); border-left: 3px solid var(--c-stop); background: rgb(232 53 43 / .12); color: #FFB1AB; font-weight: 500; }
+  .form-resumen[hidden] { display: none; }
+  .form-acciones { display: grid; gap: var(--e-3); justify-items: start; }
+  .form-acciones .boton { min-height: 58px; }
+  .form-nota { font-size: var(--t-xs); color: var(--tenue); max-width: 56ch; }
+  .form-nota a { text-decoration: underline; text-underline-offset: .2em; }
+  @media (max-width: 600px) { .form-acciones { justify-items: stretch; } }
+
+  /* Estado de carga del botón */
+  .boton[aria-busy="true"] { pointer-events: none; opacity: .85; }
+  .boton .giro { display: none; width: 18px; height: 18px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: girar .8s linear infinite; }
+  .boton[aria-busy="true"] .giro { display: inline-block; }
+  .boton[aria-busy="true"] .boton__flecha { display: none; }
+  @keyframes girar { to { transform: rotate(360deg); } }
+
+  /* Archivo: arrastrar y soltar sobre el input nativo + botón para quitar */
+  .archivo { min-height: 9.5rem; align-content: center; }
+  .archivo__icono { width: 28px; height: 28px; color: var(--c-senal); }
+  .archivo__acciones { position: relative; z-index: 2; display: flex; gap: var(--e-4); align-items: center; }
+  .archivo__quitar { font: 500 var(--t-xs)/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--tenue); text-decoration: underline; text-underline-offset: .25em; }
+  .archivo__quitar:hover { color: var(--c-tiza); }
+  .archivo.is-arrastrando { border-color: var(--c-senal); background: rgb(255 212 0 / .06); }
+
+  /* Confirmación */
+  .confirmacion { display: grid; gap: var(--e-5); justify-items: start; padding: clamp(1.75rem, 1rem + 2.4vw, 3rem); background: var(--c-senal); color: var(--c-asfalto); clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%); }
+  .confirmacion[hidden] { display: none; }
+  .confirmacion__sello { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--c-asfalto); color: var(--c-senal); }
+  .confirmacion .display { font-size: clamp(2rem, 1.2rem + 3vw, 3.5rem); }
+  .confirmacion p { max-width: 46ch; font-size: var(--t-l); }
+  .confirmacion .alert { padding: 0; border: 0; background: none; color: inherit; font-weight: 600; }
+
+  /* Columna de contexto */
+  .contexto { display: grid; gap: var(--e-5); padding-top: var(--e-6); border-top: 1px solid var(--linea); }
+  .contexto h2 { font: 500 var(--t-xs)/1.4 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--tenue); }
+  .contexto ol, .contexto ul { list-style: none; display: grid; gap: var(--e-4); counter-reset: c; }
+  .contexto li { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: var(--e-3); }
+  .contexto li::before { counter-increment: c; content: "0" counter(c); font: 500 var(--t-s)/1.6 var(--f-mono); color: var(--c-senal); }
+  .contexto li strong { display: block; font-weight: 600; }
+  .contexto li p { color: var(--tenue); font-size: var(--t-s); }
+  .contexto--alt { padding: var(--e-5); border: 1px solid var(--linea); }
+  .contexto--alt p { color: var(--tenue); font-size: var(--t-s); }
+
+  /* Rasgos del candidato (intro de empleo) */
+  .rasgos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--linea); margin-top: clamp(2.5rem, 5vw, 4rem); }
+  .rasgo { padding: var(--e-6) var(--e-5); border-left: 1px solid var(--linea); }
+  .rasgo:first-child { border-left: 0; padding-left: 0; }
+  .rasgo .titulo { margin: var(--e-4) 0 var(--e-2); }
+  .rasgo p { color: var(--tenue); font-size: var(--t-s); max-width: 34ch; }
+  @media (max-width: 760px) { .rasgos { grid-template-columns: minmax(0, 1fr); } .rasgo { border-left: 0; padding-left: 0; border-top: 1px solid var(--linea); } .rasgo:first-child { border-top: 0; } }
+
+  /* Aviso de los formularios PHP (?result=success|error) dentro de la tarjeta */
+  .form-tarjeta .alert { margin: 0; }
+}

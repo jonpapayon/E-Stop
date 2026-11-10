@@ -48,10 +48,11 @@ test('el contenido proviene del texto existente del cliente', async ({ page }) =
   ]) { expect(t, f).toContain(f); expect(o.replace('inicio operaciones', 'inició operaciones').replace('incursiono', 'incursionó'), `existe en el original: ${f}`).toContain(f); }
   // Valores completos y clientes
   await expect(page.locator('.valores__lista li')).toHaveCount(7);
-  await expect(page.locator('.logos img')).toHaveCount(10);
   await expect(page.locator('.linea-tiempo .hito')).toHaveCount(4);
-  const ctas = await page.$$eval('.cierre-emp a', (a) => a.map((e) => e.getAttribute('href')));
-  expect(ctas).toEqual(['./cotizar.html?tipo=evento', './cotizar.html?tipo=negocio']);
+  // Cierre: valores + enlace compacto a cotización; sin repetir la rejilla de clientes de la Home
+  expect(await page.$$eval('.valores__cierre a', (a) => a.map((e) => e.getAttribute('href')))).toEqual(['./cotizar.html']);
+  await expect(page.locator('main > section').last()).toHaveClass(/valores/);
+  await expect(page.locator('.logos')).toHaveCount(0);
   // Sin etiquetas de analítica nuevas (Nosotros no las tenía en producción)
   expect(fs.readFileSync(path.join(RAIZ, 'nosotros.html'), 'utf8')).not.toMatch(/GTM-|gtag\(/);
 });

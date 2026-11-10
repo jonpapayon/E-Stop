@@ -2,207 +2,198 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario para negocio </title>
+    <title>Formulario para negocio</title>
     <meta name="title" content="E-Stop Valet Parking - Negocio" />
     <meta name="description" content="Empresa líder de valet parking en Guadalajara, reconocida en proveer soluciones en la operación y manejo de estacionamientos." />
+    <link rel="canonical" href="https://svp.com.mx/negocio.html" />
+    <meta name="theme-color" content="#0B0B0A" />
     <link rel="icon" href="/assets/icons/isotipo.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/negocio.css">
-    <link rel="stylesheet" href="./css/global.css">
-
-
-
-
+    <link rel="preload" href="./assets/fuentes/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="./css/sistema.css">
+    <link rel="stylesheet" href="./css/formularios.css">
+    <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-    <header>
-            <div class="menu">
-                <div class="logo-container">
-                    <a href="index.html"><img src="./assets/icons/LOGO-STOP-min 1.png" alt="Logotipo de E-Stop Valet Parking"></a>
-                </div>
-                <div class="burger-menu">
-                    <div class="open-icon" id="open">
-                        <img src="./assets/icons/icon-burger-menu.svg" alt="Abrir menú">
-                    </div>
-                </div>
-                <nav class="nav" id="nav">
-                    <div class="close-icon" id="close">
-                        <img src="./assets/icons/icon-close.svg" alt="Cerrar menú">
-                    </div>
-                    <ul>
-                        <li><a href="./index.html">Inicio</a></li>
-                        <li><a href="./nosotros.html">Nosotros</a></li>
-                        <li><a class="selected" href="./cotizar.html">Cotizar</a></li>
-                    </ul>
-                </nav>
-            </div>
-    </header>
-    <main>
-        <section>
-            <div class="form-container">
-                <h3>Formulario Para Negocios</h3>
-                <div class="alert alert-primary" role="alert" id="alert"></div>
-                <form class="form-negocios" id="form-negocios" 
-                action="send_mail_negocio.php" method="POST">
-                    <!-- input opcion de negocio -->
-                    <div class="business-option">
-                        <legend>
-                            Selecciona Tu Tipo De Negocio:
-                        </legend>
-                        <label for="restaurante">
-                        <input type="radio" id="restaurante" name="tipoNegocio" value="restaurante">
-                        <span>Restaurante</span>
-                        </label>
-                        <label for="oficina">
-                            <input type="radio" id="oficina" name="tipoNegocio" value="oficina">
-                            <span>Oficina</span>
-                        </label>
-                        <label for="hospital">
-                            <input type="radio" id="hospital" name="tipoNegocio" value="hospital">
-                            <span>Hospital</span>
-                        </label>
-                        <label for="centro-comercial">
-                            <input type="radio" id="centro-comercial" name="tipoNegocio" value="centro-comercial">
-                            <span>Centro Comercial</span>
-                        </label>
-                        <label for="otro">
-                            <input type="radio" id="otro" name="tipoNegocio" value="otro">
-                            <span>Otro</span>
-                        </label>
-                    </div>
-                    <!-- input name -->
-                    <label for="name">
-                        <span>Nombre</span>
-                        <input name="name" id="name" required type="text">
-                    </label>
-                    <!-- input email -->
-                    <label for="email">
-                        <span>Correo Electrónico</span>
-                        <input name="email" id="email" required type="email">
-                    </label>
-                    <!-- input phone -->
-                    <label for="phone">
-                        <span>Celular</span>
-                        <input name="phone" id="phone" required type="tel">
-                    </label>
-                    <!-- input dias de servicio -->
-                        <!--<div class="services-days">-->
-                        <!--    <legend>Dias de servicio:</legend>-->
-                        <!--    <label for="lunes">-->
-                        <!--        <input type="checkbox" value="lunes" id="lunes" name="lunes" checked>-->
-                        <!--        <span>Lunes</span>-->
-                        <!--    </label>-->
-                        <!--    <label for="martes">-->
-                        <!--        <input type="checkbox" value="martes" id="martes" name="martes" checked>-->
-                        <!--        <span>Martes</span>-->
-                        <!--    </label>-->
-                        <!--    <label for="miercoles">-->
-                        <!--        <input type="checkbox" value="miercoles" id="miercoles" name="miercoles" checked>-->
-                        <!--        <span>Miércoles</span>-->
-                        <!--    </label>-->
-                        <!--    <label for="jueves">-->
-                        <!--        <input type="checkbox" value="jueves" id="jueves" name="jueves" checked>-->
-                        <!--        <span>Jueves</span>-->
-                        <!--    </label>-->
-                        <!--    <label for="viernes">-->
-                        <!--        <input type="checkbox" value="viernes" id="viernes" name="viernes" checked>-->
-                        <!--        <span>Viernes</span>-->
-                        <!--    </label>-->
-                        <!--    <label for="sabado">-->
-                        <!--        <input type="checkbox" value="sabado" id="sabado" name="sabado" checked>-->
-                        <!--        <span>Sábado</span>-->
-                        <!--    </label>-->
-                        <!--    <label for="domingo">-->
-                        <!--        <input type="checkbox" value="domingo" id="domingo" name="domingo" checked>-->
-                        <!--        <span>Domingo</span>-->
-                        <!--    </label>-->
-                        <!--</div>-->
-                    <!-- input horario -->
-                        <!--<div class="horario-input">-->
-                        <!--    <legend>Horario de servicio:</legend>-->
-                        <!--    <span>de</span>-->
-                        <!--    <label for="hora-inicio">-->
-                        <!--        <input type="time" name="hora-inicio" id="hora-inicio">-->
-                        <!--    </label>-->
-                        <!--    <span>a</span>-->
-                        <!--    <label for="hora-fin">-->
-                        <!--        <input type="time" name="hora-fin" id="hora-fin">-->
-                        <!--    </label>-->
-                        <!--</div>-->
-                    <!-- input estacionamiento -->
-                        <!--<div class="input-estacionamiento">-->
-                        <!--    <legend>Estacionamiento:</legend>-->
-                        <!--    <label for="estacionamiento-si">-->
-                        <!--        <span>Si</span>-->
-                        <!--        <input type="radio" id="estacionamiento-si" name="estacionamiento" value="si">-->
-                        <!--    </label>-->
-                        <!--    <label for="estacionamiento-no">-->
-                        <!--        <span>No</span>-->
-                        <!--        <input type="radio" id="estacionamiento-no" name="estacionamiento" value="no">-->
-                        <!--    </label>-->
-                        <!--</div>-->
-                    <!-- input cajones -->
-                        <!--<label for="numero-de-cajones">-->
-                        <!--    <span>Numero de cajones</span>-->
-                        <!--    <input type="number" id="numero-de-cajones" name="numero-de-cajones">-->
-                        <!--</label>-->
-                    <!-- text area -->
-                        <!--<label for="message" class="textarea">-->
-                        <!--    <span>Mensaje</span>-->
-                        <!--    <textarea name="message" id="message" cols="18" rows="5"></textarea>-->
-                        <!--</label>-->
-                        <button type="submit" class="">Cotizar</button>
-                    <input type="hidden" name="_next" value="index.html">
-                    <input type="hidden" name="_captcha" value="false">
-                </form>
-            </div>
-        </section>
-                <!-- whatsapp section -->
-                <div class="whatsapp-container">
-                    <a class="btn-whatsapp" target="_blank"
-                    href="https://api.whatsapp.com/send?phone=523338704157&amp;text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios." rel="noopener" aria-label="Escríbenos por WhatsApp">
-                        <img src="/assets/icons/whatsapp.svg" alt="">
-                    </a>
-                </div>
-    </main>
-    <footer>
-        <div class="footer-left-container">
-            <h2>Información De Contacto</h2>
-            <h3>Dirección de la oficina corporativa:</h3>
-            <p>Justo Sierra 3233, Vallarta, San Jorge, Guadalajara, Jalisco</p>
-            <h3>Número De Servicio Al Cliente:</h3>
-            <p><a href="tel:+523338704157">33 3870 4157</a></p>
+<!-- parcial:cabecera activo="cotizar" -->
+<a class="salto" href="#contenido">Saltar al contenido</a>
+<header class="cabecera">
+  <div class="contenedor cabecera__barra">
+    <a class="cabecera__logo" href="index.html" aria-label="E-Stop Valet Parking, inicio">
+      <img src="assets/img/logo-estop.png" alt="Logotipo de E-Stop Valet Parking" width="240" height="138">
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html#servicios" data-nav="servicios">Servicios</a>
+      <a href="nosotros.html" data-nav="nosotros">Nosotros</a>
+      <a href="index.html#preguntas" data-nav="preguntas">Preguntas</a>
+      <a href="equipo.html" data-nav="equipo">Únete al equipo</a>
+    </nav>
+    <div class="cabecera__acciones">
+      <a class="cabecera__tel" href="tel:+523338704157"><span>T.</span> 33 3870 4157</a>
+      <a class="boton boton--compacto cabecera__cta" href="cotizar.html" data-nav="cotizar" aria-current="page">Cotizar <span class="boton__flecha" aria-hidden="true">→</span></a>
+      <button class="hamburguesa" type="button" aria-expanded="false" aria-controls="menu-movil" aria-label="Abrir menú"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="menu-movil" id="menu-movil">
+  <nav class="menu-movil__lista" aria-label="Menú móvil">
+    <a href="index.html" data-nav="inicio" style="--i:0">Inicio <small>01</small></a>
+    <a href="index.html#servicios" data-nav="servicios" style="--i:1">Servicios <small>02</small></a>
+    <a href="nosotros.html" data-nav="nosotros" style="--i:2">Nosotros <small>03</small></a>
+    <a href="index.html#preguntas" data-nav="preguntas" style="--i:3">Preguntas <small>04</small></a>
+    <a href="cotizar.html" data-nav="cotizar" aria-current="page" style="--i:4">Cotizar <small>05</small></a>
+    <a href="equipo.html" data-nav="equipo" style="--i:5">Únete al equipo <small>06</small></a>
+  </nav>
+  <div class="menu-movil__pie">
+    <span class="etiqueta">Servicio al cliente</span>
+    <a class="mono" href="tel:+523338704157">33 3870 4157</a>
+    <a class="enlace" href="https://api.whatsapp.com/send?phone=523338704157&amp;text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios." target="_blank" rel="noopener">Escríbenos por WhatsApp <span aria-hidden="true">↗</span></a>
+  </div>
+</div>
+<!-- /parcial:cabecera -->
+
+<main id="contenido">
+  <section class="form-intro" aria-labelledby="titulo-form">
+    <div class="contenedor">
+      <span class="etiqueta revelar is-visible"><b>[Cotizar]</b> Cotizar por correo · Negocios</span>
+      <h1 class="display display--h1 lineas revelar" id="titulo-form" style="--retraso:100ms">
+        <span class="linea"><span style="--l:0">Cotiza el valet</span></span>
+        <span class="linea"><span style="--l:1">de tu <em>negocio.</em></span></span>
+      </h1>
+      <p class="lead revelar" style="--i:2">Déjanos tus datos de contacto y te escribiremos para conocer las necesidades de tu negocio.</p>
+    </div>
+  </section>
+
+  <section class="seccion seccion--sin-arriba">
+    <div class="contenedor form-pagina">
+      <div>
+        <!-- Contrato verificado del formulario (igual que producción): no cambiar action, names ni ocultos.
+             Campos desactivados en producción (comentados antes del rediseño): días de servicio, horario, estacionamiento, cajones, mensaje. -->
+        <form class="form-tarjeta form-negocios" id="form-negocios" action="send_mail_negocio.php" method="POST">
+          <h2 class="form-tarjeta__titulo"><span class="etiqueta"><b>Contacto</b></span> Tus datos</h2>
+          <div class="alert" role="alert" id="alert"></div>
+          <fieldset class="opciones">
+            <legend class="campo__etiqueta">Selecciona tu tipo de negocio</legend>
+            <label class="chip" for="restaurante"><input type="radio" id="restaurante" name="tipoNegocio" value="restaurante"><span>Restaurante</span></label>
+            <label class="chip" for="oficina"><input type="radio" id="oficina" name="tipoNegocio" value="oficina"><span>Oficina</span></label>
+            <label class="chip" for="hospital"><input type="radio" id="hospital" name="tipoNegocio" value="hospital"><span>Hospital</span></label>
+            <label class="chip" for="centro-comercial"><input type="radio" id="centro-comercial" name="tipoNegocio" value="centro-comercial"><span>Centro comercial</span></label>
+            <label class="chip" for="otro"><input type="radio" id="otro" name="tipoNegocio" value="otro"><span>Otro</span></label>
+          </fieldset>
+          <div class="form-rejilla">
+            <label class="campo ancho">
+              <span class="campo__etiqueta">Nombre<span class="req" aria-hidden="true">*</span></span>
+              <input name="name" id="name" required type="text" autocomplete="name">
+              <span class="campo__error">Escribe tu nombre.</span>
+            </label>
+            <label class="campo">
+              <span class="campo__etiqueta">Correo electrónico<span class="req" aria-hidden="true">*</span></span>
+              <input name="email" id="email" required type="email" autocomplete="email" inputmode="email">
+              <span class="campo__error">Revisa el formato del correo.</span>
+            </label>
+            <label class="campo">
+              <span class="campo__etiqueta">Celular<span class="req" aria-hidden="true">*</span></span>
+              <input name="phone" id="phone" required type="tel" autocomplete="tel" inputmode="tel">
+              <span class="campo__error">Escribe tu número de celular.</span>
+            </label>
+          </div>
+          <div class="form-acciones">
+            <button type="submit" class="boton boton--bloque-movil">Cotizar <span class="boton__flecha" aria-hidden="true">→</span></button>
+            <p class="form-nota">Usamos tus datos solo para responder a tu solicitud. Consulta el <a href="./privacidad.html">aviso de privacidad</a>.</p>
+          </div>
+          <input type="hidden" name="_next" value="index.html">
+          <input type="hidden" name="_captcha" value="false">
+        </form>
+      </div>
+      <aside class="form-pagina__lateral" aria-label="Otras formas de cotizar">
+        <div class="contexto contexto--alt">
+          <p><strong>¿Prefieres WhatsApp?</strong> Arma tu solicitud con todos los detalles y envíala por WhatsApp.</p>
+          <a class="enlace" href="./cotizar.html?tipo=negocio">Cotizar por WhatsApp <span aria-hidden="true">→</span></a>
         </div>
-        <div class="footer-right-container">
-            <h3>Más Información</h3>
-            <a href="./equipo.html">Únete a nuestro equipo</a>
-            <a href="./privacidad.html">Aviso de privacidad</a>
-            <a class="top" href="https://www.topmdigital.com/">hecho con amor por TOP Digital</a>
+        <div class="contexto">
+          <h2>Contacto directo</h2>
+          <p class="tenue">Servicio al cliente: <a class="enlace" href="tel:+523338704157">33 3870 4157</a></p>
         </div>
-    </footer>
-    <script src="./main.js"></script>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<!-- parcial:pie -->
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__rejilla">
+      <div class="pie__marca">
+        <img src="assets/img/logo-estop.png" alt="E-Stop Valet Parking" width="240" height="138" loading="lazy">
+        <p>Profesionales dedicados a cubrir de manera integral las necesidades de operación de estacionamientos y servicio de acomodadores.</p>
+      </div>
+      <div>
+        <h2>Contacto</h2>
+        <address>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Justo%20Sierra%203233%2C%20Vallarta%20San%20Jorge%2C%20Guadalajara%2C%20Jalisco" target="_blank" rel="noopener">Justo Sierra 3233, Vallarta San Jorge, Guadalajara, Jalisco</a>
+          <a class="pie__tel" href="tel:+523338704157">33 3870 4157</a>
+          <a href="https://api.whatsapp.com/send?phone=523338704157&amp;text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios." target="_blank" rel="noopener">WhatsApp ↗</a>
+        </address>
+      </div>
+      <nav aria-label="Sitio">
+        <h2>Sitio</h2>
+        <ul role="list">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="index.html#servicios">Servicios</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="cotizar.html">Cotizar</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Más información">
+        <h2>Más información</h2>
+        <ul role="list">
+          <li><a href="index.html#preguntas">Preguntas frecuentes</a></li>
+          <li><a href="equipo.html">Únete a nuestro equipo</a></li>
+          <li><a href="privacidad.html">Aviso de privacidad</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="pie__firma" aria-hidden="true">E-Stop</div>
+    <div class="pie__legal">
+      <span>© E-Stop Valet Parking · Guadalajara, Jalisco</span>
+      <a href="https://www.topmdigital.com/" target="_blank" rel="noopener">Hecho con amor por TOP Digital</a>
+    </div>
+  </div>
+</footer>
+<!-- /parcial:pie -->
+<!-- parcial:barra-movil -->
+<nav class="barra-movil" aria-label="Acciones rápidas">
+  <a href="tel:+523338704157">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+    Llamar
+  </a>
+  <a href="https://api.whatsapp.com/send?phone=523338704157&amp;text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios." target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.65-4.8A8.5 8.5 0 1 1 7.9 19.5z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1a4 4 0 0 1-2-2l1-1-1-2z" stroke-width="1.4"/></svg>
+    WhatsApp
+  </a>
+  <a class="barra-movil__cotizar" href="cotizar.html">Cotizar <span aria-hidden="true">→</span></a>
+</nav>
+<a class="wa-flotante" href="https://api.whatsapp.com/send?phone=523338704157&amp;text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios." target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.65-4.8A8.5 8.5 0 1 1 7.9 19.5z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1a4 4 0 0 1-2-2l1-1-1-2z" stroke-width="1.3"/></svg>
+  <span>WhatsApp</span>
+</a>
+<!-- /parcial:barra-movil -->
+
+<script src="./js/sitio.js" defer></script>
     <script>
-        // Función para obtener los parámetros de la URL
+        // Aviso tras el envío (send_mail_*.php redirige con ?result=success|error) · igual que en producción
         function getQueryParam(param) {
             let urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
-    
-        // Obtener el valor del parámetro "result"
         let result = getQueryParam('result');
         let alertDiv = document.getElementById('alert');
-    
-        // Mostrar el mensaje basado en el valor de "result"
         if (result === 'success') {
             alertDiv.textContent = '¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.';
-            alertDiv.classList.add('alert-success'); // Cambia el color de la alerta a verde
+            alertDiv.classList.add('alert-success');
         } else if (result === 'error') {
             alertDiv.textContent = 'Hubo un problema al enviar el mensaje. Por favor, inténtelo de nuevo.';
-            alertDiv.classList.add('alert-danger'); // Cambia el color de la alerta a rojo
+            alertDiv.classList.add('alert-danger');
         }
     </script>
 </body>

@@ -24,7 +24,7 @@ module.exports = defineConfig({
     launchOptions: executablePath ? { executablePath } : {},
   },
   webServer: {
-    command: `python3 -m http.server ${PORT} --bind 127.0.0.1`,
+    command: `node scripts/servidor.mjs ${PORT}`,   // gzip + 404 reales (ver scripts/servidor.mjs)
     url: `http://localhost:${PORT}/index.html`,
     reuseExistingServer: false,
   },

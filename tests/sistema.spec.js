@@ -117,7 +117,9 @@ test('solo se modifican los archivos públicos autorizados por fase', () => {
     // 1C: formulario de cotización por WhatsApp
     'cotizar.html', 'css/cotizacion.css',
     // 1D: Nosotros transformada; enlaces de WhatsApp a api.whatsapp.com (conversión GTM existente)
-    'nosotros.html', 'css/empresa.css', 'evento.html', 'negocio.html'];
+    'nosotros.html', 'css/empresa.css', 'evento.html', 'negocio.html',
+    // 1E: páginas restantes con el diseño nuevo
+    'privacidad.html', '404.html', 'css/formularios.css', 'css/legal.css'];
   const cambios = execSync('git diff --name-only f27ac64 -- "*.html" css/ main.js assets/images assets/logos assets/icons', { cwd: RAIZ }).toString()
     .split('\n').filter((f) => f && !/^(dev|partials)\//.test(f) && f !== 'css/sistema.css' && !AUTORIZADOS.includes(f));
   const nuevosSinSeguir = execSync('git ls-files --others --exclude-standard -- "*.html"', { cwd: RAIZ }).toString().split('\n').filter((f) => f && !/^(dev|partials)\//.test(f));

@@ -123,7 +123,8 @@
     input.addEventListener('change', () => {
       const f = input.files && input.files[0];
       caja.classList.toggle('has-archivo', !!f);
-      if (nombre) nombre.textContent = f ? `${f.name} · ${(f.size / 1024 / 1024).toFixed(2)} MB` : '';
+      const tam = f && (f.size < 1048576 ? `${Math.max(1, Math.round(f.size / 1024))} KB` : `${(f.size / 1048576).toFixed(1)} MB`);
+      if (nombre) nombre.textContent = f ? `${f.name} · ${tam}` : '';
     });
   });
 })();

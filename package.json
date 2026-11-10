@@ -3,13 +3,15 @@
   "private": true,
   "description": "Sitio web de E-Stop Valet Parking. HTML/CSS/JS estático: estas dependencias son SOLO de desarrollo y no se despliegan.",
   "scripts": {
-    "serve": "python3 -m http.server 8000",
+    "serve": "node scripts/servidor.mjs 8000",
     "test": "playwright test",
+    "test:cwv": "CWV=1 playwright test tests/calidad.spec.js -g \"Core Web Vitals\" --workers=1",
     "partials": "node scripts/sync-partials.mjs",
     "partials:check": "node scripts/sync-partials.mjs --check",
     "imagenes": "node scripts/optimizar-imagenes.mjs"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.11.0",
     "@playwright/test": "1.56.1",
     "sharp": "0.34.4"
   }

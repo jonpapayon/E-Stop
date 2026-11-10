@@ -65,5 +65,7 @@
   .valores__lista li:not(:last-child)::after { content: ""; width: .28em; height: .28em; background: var(--c-senal); transform: rotate(45deg); }
   .valores__lista li:nth-child(even) { color: transparent; -webkit-text-stroke: 1.2px var(--c-tiza); }
   .valores__nota { margin-top: var(--e-6); color: var(--tenue); font-size: var(--t-s); }
+  .valores__cierre { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--e-5); margin-top: var(--e-8); padding-top: var(--e-6); border-top: 1px solid var(--linea); }
+  .valores__cierre p { font: 700 var(--t-xl)/1.2 var(--f-display); font-stretch: 106%; max-width: 28ch; }
   @media (max-width: 600px) { .valores__lista li { font-stretch: 78%; gap: var(--e-4); } .valores__lista { gap: var(--e-2) var(--e-4); } }
 }
