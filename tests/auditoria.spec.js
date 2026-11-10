@@ -206,9 +206,11 @@ test('Enlaces: internos 200, WhatsApp, teléfono, navegación', async ({ page, r
         const u = l.abs.split('#')[0];
         if (!(u in report.internal)) report.internal[u] = (await request.get(u)).status();
       } else if (l.href.startsWith('tel:')) report.tel[p] = l.href;
-      else if (l.abs.startsWith('https://wa.me/')) {
+      else if (/^https:\/\/(api\.whatsapp\.com\/send|wa\.me\/)/.test(l.abs)) {
+        // Enlaces del sitio: api.whatsapp.com (activa la conversión GTM «contiene whatsapp»); formulario: wa.me
         const u = new URL(l.abs);
-        report.wa[p] = { phone: u.pathname.slice(1), text: u.searchParams.get('text') };
+        if (u.hostname === 'wa.me' && !u.searchParams.get('text')) continue;   // respaldo del formulario (se rellena al enviar)
+        report.wa[p] = { phone: u.searchParams.get('phone') || u.pathname.slice(1), text: u.searchParams.get('text') };
       } else report.external.add(l.abs);
     }
   }
@@ -223,10 +225,11 @@ test('Enlaces: internos 200, WhatsApp, teléfono, navegación', async ({ page, r
   }
   // Navegación por menú en escritorio
   await page.goto('/index.html');
-  for (const [txt, url] of [['Nosotros', /nosotros\.html$/], ['Cotizar', /cotizar\.html$/]]) {
-    await page.locator('.cabecera .nav, header nav').first().getByRole('link', { name: txt, exact: true }).click();
-    await expect(page).toHaveURL(url);
-  }
+  await page.locator('.cabecera .nav, header nav').first().getByRole('link', { name: 'Nosotros', exact: true }).click();
+  await expect(page).toHaveURL(/nosotros\.html$/);
+  // «Cotizar» es el botón de la cabecera en el diseño nuevo (enlace del menú en el anterior)
+  await page.locator('.cabecera__cta, header nav a[href$="cotizar.html"]').first().click();
+  await expect(page).toHaveURL(/cotizar\.html$/);
   // Volver al inicio: logotipo (diseño nuevo) o enlace «Inicio» (diseño anterior)
   await page.locator('.cabecera__logo, header .logo-container a').first().click();
   await expect(page).toHaveURL(/index\.html$/);

@@ -23,8 +23,8 @@ test('carga limpia, número oficial y sin desbordamiento (320–1920)', async ({
   await page.goto('/cotizar.html');
   expect(await page.getAttribute('#form-cotizacion', 'data-whatsapp')).toBe(NUMERO);
   // Mismo número que el resto del sitio
-  const sitio = await page.$$eval('a[href*="wa.me/"]', (a) => [...new Set(a.map((e) => new URL(e.href).pathname))]);
-  expect(sitio).toEqual(['/' + NUMERO]);
+  const sitio = await page.$$eval('a[href*="whatsapp"], a[href*="wa.me"]', (a) => [...new Set(a.map((e) => { const u = new URL(e.href); return u.searchParams.get('phone') || u.pathname.slice(1); }))]);
+  expect(sitio).toEqual([NUMERO]);
   expect(await page.locator('h1').count()).toBe(1);
   const desborde = [];
   for (const w of [320, 375, 390, 414, 768, 1024, 1440, 1920]) {
@@ -210,6 +210,13 @@ test('integración: CTAs de la Home llevan al formulario y los formularios PHP s
   await page.goto('/cotizar.html');
   await expect(page.locator('.cot__alterno a[href="./evento.html"]')).toBeVisible();
   await expect(page.locator('.cot__alterno a[href="./negocio.html"]')).toBeVisible();
-  // evento.html y negocio.html sin cambios respecto a la Etapa 0 (siguen enviando a sus PHP)
-  expect(() => execSync('git diff --quiet f27ac64 -- evento.html negocio.html', { cwd: RAIZ })).not.toThrow();
+  // evento.html y negocio.html: único cambio permitido desde la Etapa 0 = enlace de WhatsApp a api.whatsapp.com
+  const diff = execSync('git diff -U0 f27ac64 -- evento.html negocio.html', { cwd: RAIZ }).toString()
+    .split('\n').filter((l) => /^[+-](?![+-])/.test(l));
+  expect(diff.length).toBeGreaterThan(0);
+  for (const l of diff) expect(l, l).toMatch(/wa\.me\/523338704157|api\.whatsapp\.com\/send\?phone=523338704157/);
+  for (const p of ['evento.html', 'negocio.html']) {
+    await page.goto('/' + p);
+    expect(await page.getAttribute(p === 'evento.html' ? '#form-evento' : '#form-negocios', 'action')).toBe(p === 'evento.html' ? 'send_mail_evento.php' : 'send_mail_negocio.php');
+  }
 });

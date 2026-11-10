@@ -5,6 +5,28 @@
   html.classList.add('js');
   const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------- Analítica: eventos propios en dataLayer (GTM) ----------
+     Solo se empujan eventos con prefijo «estop_»: ningún disparador actual del contenedor
+     (gtm.js, gtm.init, gtm.linkClick) los escucha, así que no duplican conversiones.
+     No se envían datos personales (nombre, comentarios, ubicación).
+       estop_clic_cotizar        → clic en un enlace hacia cotizar.html {origen, servicio}
+       estop_whatsapp_abierto    → se abre WhatsApp (enlace o formulario) {origen}
+       estop_formulario_cotizacion_completado → el formulario pasó la validación y se abrió
+                                    WhatsApp; NO confirma que el mensaje se haya enviado */
+  const capa = (event, datos = {}) => { window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event, ...datos }); };
+  window.estopAnalitica = capa;
+  const ORIGENES = [['.wa-flotante', 'flotante'], ['.barra-movil', 'barra_movil'], ['.menu-movil', 'menu_movil'], ['.cabecera', 'cabecera'],
+    ['.pie', 'pie'], ['.hero', 'hero'], ['#servicios', 'servicios'], ['.modulos', 'modulos'], ['#preguntas', 'preguntas'],
+    ['.cierre', 'cierre'], ['.cot__listo', 'formulario_respaldo'], ['.cot__alterno', 'cotizar_alterno'], ['main', 'contenido']];
+  const origenDe = (a) => a.dataset.origen || (ORIGENES.find(([s]) => a.closest(s)) || [0, 'otro'])[1];
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    let u; try { u = new URL(a.href, location.href); } catch { return; }
+    if (/(^|\.)whatsapp\.com$|^wa\.me$/.test(u.hostname)) capa('estop_whatsapp_abierto', { origen: origenDe(a) });
+    else if (/\/cotizar\.html$/.test(u.pathname) && u.origin === location.origin) capa('estop_clic_cotizar', { origen: origenDe(a), servicio: u.searchParams.get('tipo') || '' });
+  }, true);
+
   /* ---------- Cabecera: sólida al hacer scroll, se oculta al bajar ---------- */
   const cabecera = document.querySelector('.cabecera');
   if (cabecera) {

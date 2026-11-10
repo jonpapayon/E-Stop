@@ -57,7 +57,8 @@ test.describe('Todas las páginas', () => {
       const wa = page.locator('a.btn-whatsapp');
       if (await wa.count()) {
         const href = await wa.getAttribute('href');
-        expect(href).toMatch(/^https:\/\/wa\.me\/523338704157\?text=/);
+        // api.whatsapp.com: la conversión de Google Ads existente se dispara con URLs que contienen «whatsapp»
+        expect(href).toMatch(/^https:\/\/api\.whatsapp\.com\/send\?phone=523338704157&text=/);
         expect(await wa.getAttribute('aria-label')).toBeTruthy();
       }
       // Teléfono clicable en el footer

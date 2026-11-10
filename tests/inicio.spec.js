@@ -121,15 +121,15 @@ test('servicios, módulos, WhatsApp y teléfono', async ({ page }) => {
   // WhatsApp: flotante en escritorio, barra en móvil
   await expect(page.locator('.wa-flotante')).toBeVisible();
   await expect(page.locator('.barra-movil')).toBeHidden();
-  const wa = await page.$$eval('a[href*="wa.me"]', (a) => [...new Set(a.map((e) => e.href))]);
-  expect(wa).toEqual(['https://wa.me/523338704157?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios.']);
+  const wa = await page.$$eval('a[href*="whatsapp"], a[href*="wa.me"]', (a) => [...new Set(a.map((e) => e.href))]);
+  expect(wa).toEqual(['https://api.whatsapp.com/send?phone=523338704157&text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios.']);
   const tel = await page.$$eval('a[href^="tel:"]', (a) => [...new Set(a.map((e) => e.getAttribute('href')))]);
   expect(tel).toEqual(['tel:+523338704157']);
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(page.locator('.wa-flotante')).toBeHidden();
   await expect(page.locator('.barra-movil')).toBeVisible();
   await expect(page.locator('.barra-movil a[href^="tel:"]')).toBeVisible();
-  await expect(page.locator('.barra-movil a[href*="wa.me"]')).toBeVisible();
+  await expect(page.locator('.barra-movil a[href*="whatsapp"]')).toBeVisible();
 });
 
 test('enlaces: todos los internos responden y las anclas existen', async ({ page, request }) => {

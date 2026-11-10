@@ -10,7 +10,7 @@
   const valor = (n) => (form.elements[n] && 'value' in form.elements[n] ? String(form.elements[n].value).trim() : '');
   const marcado = (n) => $(`input[name="${n}"]:checked`)?.value || '';
   const etiquetaDe = (n) => $(`input[name="${n}"]:checked`)?.closest('label')?.querySelector('span')?.textContent.trim() || '';
-  let intentado = false;
+  let intentado = false, ultimoEnviado = '';
   const tocados = new Set();
 
   /* ---------- Mostrar/ocultar grupos según el servicio ---------- */
@@ -135,6 +135,14 @@
     const url = enlaceWhatsApp();
     $('[data-enlace-wa]').href = url;
     listo.hidden = false;
+    // Analítica: «completado» una sola vez por mensaje distinto (evita duplicados por doble clic
+    // o reenvíos idénticos). La apertura de WhatsApp se mide aparte y no implica envío.
+    const capa = window.estopAnalitica || ((event, d) => { (window.dataLayer = window.dataLayer || []).push({ event, ...d }); });
+    if (url !== ultimoEnviado) {
+      capa('estop_formulario_cotizacion_completado', { servicio: marcado('servicio'), tipo_negocio: marcado('tipoNegocio') && marcado('servicio') === 'negocio' ? marcado('tipoNegocio') : '', envio_confirmado: false });
+      ultimoEnviado = url;
+    }
+    capa('estop_whatsapp_abierto', { origen: 'formulario' });
     window.open(url, '_blank', 'noopener');
   });
 

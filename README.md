@@ -37,6 +37,39 @@ Abrir los archivos con doble clic (`file://`) no funciona bien: usa siempre un s
 
 Los scripts PHP viven solo en el servidor: aún no están versionados.
 
+## Analítica (GTM-PMX8X4DW · Google Ads AW-16538094770)
+
+Etiquetas cargadas **solo en `index.html`** (igual que en producción). Configuración revisada del
+contenedor (gtm.js público, nov 2026):
+
+| Etiqueta | Disparador |
+|---|---|
+| Conversión Ads `…/9RWKCITp2M4ZELKZ_c09` | Clic en enlace cuya URL **contiene «whatsapp»** |
+| Conversión Ads `…/5Sn4CIfp2M4ZELKZ_c09` | Clic en enlace cuya URL **contiene «cotizar»** |
+| Etiqueta de Google + vinculador de conversiones | Todas las cargas |
+
+Por eso los enlaces de WhatsApp del sitio usan `https://api.whatsapp.com/send?phone=…` (contiene
+«whatsapp»). El formulario de cotización abre `wa.me` con `window.open` y **no** dispara esa conversión.
+
+Eventos propios en `dataLayer` (`js/sitio.js`, `js/cotizacion.js`), sin datos personales; ningún
+disparador actual los escucha:
+
+| Evento | Cuándo | Parámetros |
+|---|---|---|
+| `estop_clic_cotizar` | Clic en un enlace a `cotizar.html` | `origen`, `servicio` |
+| `estop_whatsapp_abierto` | Se abre WhatsApp (enlace o formulario) | `origen` |
+| `estop_formulario_cotizacion_completado` | El formulario pasó la validación y abrió WhatsApp (una vez por mensaje) | `servicio`, `tipo_negocio`, `envio_confirmado: false` |
+
+`estop_formulario_cotizacion_completado` **no** confirma que el mensaje se haya enviado.
+Para medirlos hay que configurarlos en GTM (y cargar GTM en `cotizar.html`, revisando antes que la
+regla «contiene cotizar» no duplique conversiones dentro de esa página).
+
+## Pendiente de validación con el cliente (no publicar sin confirmar)
+
+Cifras de la antigua página Nosotros: más de 30,000 automóviles al mes, más de 130 empleados,
+10,000+ lugares, 95 % de satisfacción, 25,000 usuarios mensuales (contradice los 30,000/mes),
+«más de 20 años», «la mejor empresa en el ramo» y la razón social vigente.
+
 ## Despliegue
 
 **No subir:** `node_modules/`, `tests/`, `test-results/`, `scripts/`, `partials/`, `dev/`, `assets/fotos/`,
