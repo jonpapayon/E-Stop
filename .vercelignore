@@ -13,3 +13,5 @@ playwright.config.js
 README.md
 .gitignore
 .vercelignore
+.env*
+.vercel
