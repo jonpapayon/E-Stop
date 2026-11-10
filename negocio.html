@@ -13,6 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/negocio.css">
     <link rel="stylesheet" href="./css/global.css">
+
+
+
+
 </head>
 <body>
     <header>
@@ -41,8 +45,9 @@
         <section>
             <div class="form-container">
                 <h3>Formulario Para Negocios</h3>
+                <div class="alert alert-primary" role="alert" id="alert"></div>
                 <form class="form-negocios" id="form-negocios" 
-                action="https://formsubmit.co/contacto@svp.com.mx" method="POST">
+                action="send_mail_negocio.php" method="POST">
                     <!-- input opcion de negocio -->
                     <div class="business-option">
                         <legend>
@@ -71,7 +76,7 @@
                     </div>
                     <!-- input name -->
                     <label for="name">
-                        <span>Nombre Completo</span>
+                        <span>Nombre</span>
                         <input name="name" id="name" required type="text">
                     </label>
                     <!-- input email -->
@@ -85,71 +90,71 @@
                         <input name="phone" id="phone" required type="tel">
                     </label>
                     <!-- input dias de servicio -->
-                    <div class="services-days">
-                        <legend>Dias de servicio:</legend>
-                        <label for="lunes">
-                            <input type="checkbox" value="lunes" id="lunes" name="lunes" checked>
-                            <span>Lunes</span>
-                        </label>
-                        <label for="martes">
-                            <input type="checkbox" value="martes" id="martes" name="martes" checked>
-                            <span>Martes</span>
-                        </label>
-                        <label for="miercoles">
-                            <input type="checkbox" value="miercoles" id="miercoles" name="miercoles" checked>
-                            <span>Miércoles</span>
-                        </label>
-                        <label for="jueves">
-                            <input type="checkbox" value="jueves" id="jueves" name="jueves" checked>
-                            <span>Jueves</span>
-                        </label>
-                        <label for="viernes">
-                            <input type="checkbox" value="viernes" id="viernes" name="viernes" checked>
-                            <span>Viernes</span>
-                        </label>
-                        <label for="sabado">
-                            <input type="checkbox" value="sabado" id="sabado" name="sabado" checked>
-                            <span>Sábado</span>
-                        </label>
-                        <label for="domingo">
-                            <input type="checkbox" value="domingo" id="domingo" name="domingo" checked>
-                            <span>Domingo</span>
-                        </label>
-                    </div>
+                        <!--<div class="services-days">-->
+                        <!--    <legend>Dias de servicio:</legend>-->
+                        <!--    <label for="lunes">-->
+                        <!--        <input type="checkbox" value="lunes" id="lunes" name="lunes" checked>-->
+                        <!--        <span>Lunes</span>-->
+                        <!--    </label>-->
+                        <!--    <label for="martes">-->
+                        <!--        <input type="checkbox" value="martes" id="martes" name="martes" checked>-->
+                        <!--        <span>Martes</span>-->
+                        <!--    </label>-->
+                        <!--    <label for="miercoles">-->
+                        <!--        <input type="checkbox" value="miercoles" id="miercoles" name="miercoles" checked>-->
+                        <!--        <span>Miércoles</span>-->
+                        <!--    </label>-->
+                        <!--    <label for="jueves">-->
+                        <!--        <input type="checkbox" value="jueves" id="jueves" name="jueves" checked>-->
+                        <!--        <span>Jueves</span>-->
+                        <!--    </label>-->
+                        <!--    <label for="viernes">-->
+                        <!--        <input type="checkbox" value="viernes" id="viernes" name="viernes" checked>-->
+                        <!--        <span>Viernes</span>-->
+                        <!--    </label>-->
+                        <!--    <label for="sabado">-->
+                        <!--        <input type="checkbox" value="sabado" id="sabado" name="sabado" checked>-->
+                        <!--        <span>Sábado</span>-->
+                        <!--    </label>-->
+                        <!--    <label for="domingo">-->
+                        <!--        <input type="checkbox" value="domingo" id="domingo" name="domingo" checked>-->
+                        <!--        <span>Domingo</span>-->
+                        <!--    </label>-->
+                        <!--</div>-->
                     <!-- input horario -->
-                    <div class="horario-input">
-                        <legend>Horario de servicio:</legend>
-                        <span>de</span>
-                        <label for="hora-inicio">
-                            <input type="time" name="hora-inicio" id="hora-inicio">
-                        </label>
-                        <span>a</span>
-                        <label for="hora-fin">
-                            <input type="time" name="hora-fin" id="hora-fin">
-                        </label>
-                    </div>
+                        <!--<div class="horario-input">-->
+                        <!--    <legend>Horario de servicio:</legend>-->
+                        <!--    <span>de</span>-->
+                        <!--    <label for="hora-inicio">-->
+                        <!--        <input type="time" name="hora-inicio" id="hora-inicio">-->
+                        <!--    </label>-->
+                        <!--    <span>a</span>-->
+                        <!--    <label for="hora-fin">-->
+                        <!--        <input type="time" name="hora-fin" id="hora-fin">-->
+                        <!--    </label>-->
+                        <!--</div>-->
                     <!-- input estacionamiento -->
-                    <div class="input-estacionamiento">
-                        <legend>Estacionamiento:</legend>
-                        <label for="estacionamiento-si">
-                            <span>Si</span>
-                            <input type="radio" id="estacionamiento-si" name="estacionamiento" value="si">
-                        </label>
-                        <label for="estacionamiento-no">
-                            <span>No</span>
-                            <input type="radio" id="estacionamiento-no" name="estacionamiento" value="no">
-                        </label>
-                    </div>
+                        <!--<div class="input-estacionamiento">-->
+                        <!--    <legend>Estacionamiento:</legend>-->
+                        <!--    <label for="estacionamiento-si">-->
+                        <!--        <span>Si</span>-->
+                        <!--        <input type="radio" id="estacionamiento-si" name="estacionamiento" value="si">-->
+                        <!--    </label>-->
+                        <!--    <label for="estacionamiento-no">-->
+                        <!--        <span>No</span>-->
+                        <!--        <input type="radio" id="estacionamiento-no" name="estacionamiento" value="no">-->
+                        <!--    </label>-->
+                        <!--</div>-->
                     <!-- input cajones -->
-                    <label for="numero-de-cajones">
-                        <span>Numero de cajones</span>
-                        <input type="number" id="numero-de-cajones" name="numero-de-cajones">
-                    </label>
+                        <!--<label for="numero-de-cajones">-->
+                        <!--    <span>Numero de cajones</span>-->
+                        <!--    <input type="number" id="numero-de-cajones" name="numero-de-cajones">-->
+                        <!--</label>-->
                     <!-- text area -->
-                    <label for="message" class="textarea">
-                        <span>Mensaje</span>
-                        <textarea name="message" id="message" cols="18" rows="5"></textarea>
-                    </label>
+                        <!--<label for="message" class="textarea">-->
+                        <!--    <span>Mensaje</span>-->
+                        <!--    <textarea name="message" id="message" cols="18" rows="5"></textarea>-->
+                        <!--</label>-->
                         <button type="submit" class="">Cotizar</button>
                     <input type="hidden" name="_next" value="index.html">
                     <input type="hidden" name="_captcha" value="false">
@@ -180,5 +185,25 @@
         </div>
     </footer>
     <script src="./main.js"></script>
+    <script>
+        // Función para obtener los parámetros de la URL
+        function getQueryParam(param) {
+            let urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+    
+        // Obtener el valor del parámetro "result"
+        let result = getQueryParam('result');
+        let alertDiv = document.getElementById('alert');
+    
+        // Mostrar el mensaje basado en el valor de "result"
+        if (result === 'success') {
+            alertDiv.textContent = '¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.';
+            alertDiv.classList.add('alert-success'); // Cambia el color de la alerta a verde
+        } else if (result === 'error') {
+            alertDiv.textContent = 'Hubo un problema al enviar el mensaje. Por favor, inténtelo de nuevo.';
+            alertDiv.classList.add('alert-danger'); // Cambia el color de la alerta a rojo
+        }
+    </script>
 </body>
 </html>
