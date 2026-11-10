@@ -125,6 +125,26 @@ body {
     text-decoration: none;
     font-size: var(--parrafo);
 }
+/* CTAs como enlace (antes <button><a>, HTML inválido) */
+a.cta-black,
+a.cta-white {
+    display: inline-block;
+    text-decoration: none;
+    font-size: var(--parrafo);
+}
+a.cta-black { color: var(--blanco); }
+a.cta-white { color: var(--negro); }
+/* avisos de formularios (?result=success|error) */
+.alert {
+    max-width: 52rem;
+    width: 100%;
+    padding: 1.2rem 1.6rem;
+    border-radius: .8rem;
+    font-weight: 500;
+}
+.alert:empty { display: none; }
+.alert-success { background-color: #DFF5E1; color: #14532D; border: 1px solid #86C793; }
+.alert-danger { background-color: #FDE2E1; color: #7F1D1D; border: 1px solid #E8A09C; }
 /* footer */
 footer {
     background-color: var(--amarilo-claro);
@@ -142,6 +162,7 @@ footer {
     flex-wrap: nowrap;
     gap: 1rem;
 }
+.footer-left-container a,
 .footer-right-container a {
     color: var(--negro-2);
 }
